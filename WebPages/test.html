@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos de llamadas a los servicios web de la API</title>
+
+    <script src="./js/services/usuariosController.js"></script>
+    <script type="text/javascript">
+
+        //GetAll();
+
+        //Get(1);
+        
+        const emailParam = new Filtros();
+        emailParam.agregarElemento('email', 'david@correo.com');
+        //GetByFilters('ObtenerUsuarioByEmail', emailParam);
+
+
+         const loginParams = new Filtros();
+        loginParams.agregarElemento('email', 'david@correo.com');
+        var password = 'Akdn873%$_sa';
+        calcularHash(password)
+            .then(hash => {
+                loginParams.agregarElemento('contraseña', hash);
+                //PatchByFilters('Login', loginParams);
+            })
+            .catch(error => {
+                console.error('Error al calcular el hash:', error);
+                alert("Error al calcular el hash: " + error);
+            });
+
+
+        const validationParams = new Filtros();
+        validationParams.agregarElemento('email', 'david@correo.com');
+        //PatchByFilters('ValidarCuenta',validationParams);
+
+
+        const suscriptionParams = new Filtros();
+        suscriptionParams.agregarElemento('email', 'dgomezma@gmail.com');
+        suscriptionParams.agregarElemento('suscrito', true);
+        //PatchByFilters('ActivacionSuscripcion', suscriptionParams);
+
+
+        const changePasswordParams = new Filtros();
+        changePasswordParams.agregarElemento('email', 'david@correo.com');
+        calcularHash('nuevaPassword!').then(hash => changePasswordParams.agregarElemento('nuevaContraseña', hash));
+        //PatchByFilters('CambiarContraseña', changePasswordParams);
+
+
+        //Delete(3);
+
+
+        var usuario = new Usuario(
+            3,
+            "Dave",
+            "GM",
+            "dgomezma@gmail.com",
+            false,
+            "",
+            "1986-01-19",
+            false,
+            "2023-11-18 19:00:00",
+            300);
+
+        var newPassword = new Date().toLocaleString();
+        calcularHash(newPassword).then(hash => usuario.contraseña = hash);
+        //Post('CrearUsuario', usuario);
+
+
+        usuario.id = 4;
+        usuario.nombre = 'updated';
+        usuario.apellidos = 'updated';
+        usuario.correo = 'updated';
+        usuario.puntos = 9999;
+        //Put('ActualizarUsuario', usuario);
+
+
+        // TODO probar a crear desde el objeto devuelto en [userLogged]
+
+
+    </script>
+</head>
+    <body>
+        <h1>Usuarios</h1>
+        <ul id="lista-usuarios"></ul>
+    </body>
+</html>
