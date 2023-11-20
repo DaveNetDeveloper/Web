@@ -6,18 +6,33 @@
     <title>Ejemplos de llamadas a los servicios web de la API</title>
 
     <script src="./js/services/usuariosController.js"></script>
+    <script src="./js/libraries/utilities.js"></script>
+
     <script type="text/javascript">
 
-        //GetAll();
+        GetAll()
+            .then(resultado => {
+                const listaUsuarios = document.getElementById('lista-usuarios');
+                resultado.forEach(entidad => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${entidad.id}: ${entidad.nombre}`;
+                    listaUsuarios.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error fuera de la función:', error);
+            });
+
+
 
         //Get(1);
-        
+
         const emailParam = new Filtros();
         emailParam.agregarElemento('email', 'david@correo.com');
         //GetByFilters('ObtenerUsuarioByEmail', emailParam);
 
 
-         const loginParams = new Filtros();
+        const loginParams = new Filtros();
         loginParams.agregarElemento('email', 'david@correo.com');
         var password = 'Akdn873%$_sa';
         calcularHash(password)
@@ -29,6 +44,16 @@
                 console.error('Error al calcular el hash:', error);
                 alert("Error al calcular el hash: " + error);
             });
+
+        // Nueva cookie con el token del usuario
+        const token = `Bearer ${userToken}`;
+        const tokenCodificao = btoa(token);
+        const expiracionEnDias = 30;
+        setCookie("token", tokenCodificao, expiracionEnDias);
+
+        // Obtener el valor de la cookie 
+        const valorDeCookie = getCookie("token");
+        const tokenDescodificado = atob(valorDeCookie); 
 
 
         const validationParams = new Filtros();
@@ -76,7 +101,7 @@
         //Put('ActualizarUsuario', usuario);
 
 
-        // TODO probar a crear desde el objeto devuelto en [userLogged]
+        // TODO: Probar a crear desde el objeto devuelto en [userLogged]
 
 
     </script>

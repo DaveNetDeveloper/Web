@@ -1,11 +1,18 @@
-﻿const baseUrl = `https://localhost`;
+﻿//
+// Constantes
+//
+const baseUrl = `https://localhost`;
 const controllerName = `Usuarios`;
 const port = `7161`;
 const apiUrl = `${baseUrl}:${port}/${controllerName}/`;
 
-var userToken = "iqSSXsiTBZuRkHI+nIjhDGtm9MVoWSNhhT8v2EwCeSw=";
+var userToken = "iqSSXsiTBZuRkHI+nIjhDGtm9MVoWSNhhT8v2EwCeSw="; // TODO: cambiar por valor de la cookie
 
+//
+// Clases
+//
 class Usuario {
+
     constructor(id, nombre, apellidos, correo, activo, contraseña, fechaNacimiento, suscrito, fechaCreacion, puntos) {
         this.id = id;
         this.nombre = nombre;
@@ -28,62 +35,40 @@ class Usuario {
 
 class Filtros {
     constructor() {
-        // Propiedad bidimensional para almacenar elementos con clave/valor
-        this.elementos = [];
+        this.elementos = [];  // Propiedad bidimensional para almacenar elementos con clave/valor
     }
-
-    // Método para agregar un elemento con clave/valor al array bidimensional
-    agregarElemento(clave, valor) {
+    agregarElemento(clave, valor) { // Método para agregar un elemento con clave/valor al array bidimensional
         this.elementos.push([clave, valor]);
     }
-
-    // Método para obtener el valor asociado a una clave
-    obtenerValor(clave) {
+    obtenerValor(clave) { // Método para obtener el valor asociado a una clave
         const elementoEncontrado = this.elementos.find(elemento => elemento[0] === clave);
         return elementoEncontrado ? elementoEncontrado[1] : undefined;
     }
-
-    // Método para imprimir todos los elementos por consola
-    imprimirElementos() {
+    imprimirElementos() { // Método para imprimir todos los elementos por consola
         this.elementos.forEach(elemento => {
             console.log(`Clave: ${elemento[0]}, Valor: ${elemento[1]}`);
         });
     }
 }; 
 
-async function calcularHash(cadena) {
-    // Convierte la cadena en un array de bytes (codificación UTF-8)
-    const buffer = new TextEncoder().encode(cadena);
-
-    // Calcula el hash utilizando el algoritmo SHA-256
-    const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
-
-    // Convierte el resultado del hash a una cadena hexadecimal
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-
-    return hashHex;
-}
-
-
-// Web services del controlador
+//
+// Proxis con los web services del controlador 
+//
 function Get(id) {
 
     var nameMethod = "ObtenerUsuario";
+ 
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userToken}` 
+        }, 
+    };
 
-    document.addEventListener('DOMContentLoaded', () => {
-        
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${userToken}` 
-            }, 
-        };
+    const urlConParametro = `${apiUrl}${nameMethod}/${id}`; 
 
-        const urlConParametro = `${apiUrl}${nameMethod}/${id}`; 
-
-        fetch(urlConParametro, requestOptions)
+    return fetch(urlConParametro, requestOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.status}`);
@@ -100,105 +85,19 @@ function Get(id) {
         })
         .catch(error => {
             console.error('Error al recuperar datos:', error.message);
-        });
-    });
+        }); 
 }
 
 function GetAll() {
-
-    document.addEventListener('DOMContentLoaded', () => {
-
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${userToken}`
-            },
-        };
-
-        const url = `${apiUrl}ObtenerUsuarios`; 
-        fetch(url, requestOptions)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error en la solicitud: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(listaEntidades => {
-                const listaUsuarios = document.getElementById('lista-usuarios');
-                listaEntidades.forEach(entidad => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `${entidad.id}: ${entidad.nombre}`;
-                    listaUsuarios.appendChild(listItem);
-                });
-            })
-            .catch(error => {
-                console.error('Error al recuperar datos:', error.message);
-            });
-    });
-}
-
-function GetByFilters(nameMethod, pFiltros) { //paramName, paramValue) {
-
-    document.addEventListener('DOMContentLoaded', () => {
-
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${userToken}`
-            },
-        };
-
-        var urlConFiltros = `${apiUrl}${nameMethod}`;
-        var isFirstParam = true;
-        pFiltros.elementos.forEach(filtro => {
-            if (isFirstParam) urlConFiltros = `${urlConFiltros}?`;
-            else urlConFiltros = `${urlConFiltros}&`;
-            urlConFiltros = `${urlConFiltros}${filtro[0]}=${encodeURIComponent(filtro[1])}`;
-            isFirstParam = false;
-        });
-
-        fetch(urlConFiltros, requestOptions)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error en la solicitud: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(usuario => {
-                const listaUsuarios = document.getElementById('lista-usuarios');
-                const listItem = document.createElement('li');
-                listItem.textContent = `${usuario.id}: ${usuario.nombre}`;
-                listaUsuarios.appendChild(listItem);
-            })
-            .catch(error => {
-                console.error('Error al recuperar datos:', error.message);
-            });
-    }); 
-}
-
-function PatchByFilters(nameMethod, pFiltros) {
-
-    document.addEventListener('DOMContentLoaded', () => {
-
-        var urlConFiltros = `${apiUrl}${nameMethod}`;
-
-        var isFirstParam = true;
-        pFiltros.elementos.forEach(filtro => {
-            if (isFirstParam) urlConFiltros = `${urlConFiltros}?`; 
-            else urlConFiltros = `${urlConFiltros}&`; 
-            urlConFiltros = `${urlConFiltros}${filtro[0]}=${encodeURIComponent(filtro[1])}`;
-            isFirstParam = false;
-        });
-
-        fetch(urlConFiltros, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${userToken}`
-            }
-        })
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userToken}`
+        },
+    };
+    const url = `${apiUrl}ObtenerUsuarios`;
+    return fetch(url, requestOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.status}`);
@@ -206,93 +105,148 @@ function PatchByFilters(nameMethod, pFiltros) {
             return response.json();
         })
         .then(data => {
-            const listaUsuarios = document.getElementById('lista-usuarios');
-            const listItem = document.createElement('li');
-
-            listItem.textContent = `${data.id}: ${data.nombre}`;
-            listaUsuarios.appendChild(listItem);
+            return data;
         })
         .catch(error => {
-            //console.error('Error al recuperar datos:', error.message);
+            console.error('Error al recuperar datos:', error.message);
+            throw error;
         });
-    });
 }
 
-function Delete(id) {
+function GetByFilters(nameMethod, pFiltros) {
 
-    document.addEventListener('DOMContentLoaded', () => {
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userToken}`
+        },
+    };
 
-        var urlConParametro = `${apiUrl}Eliminar/${id}`;
-        fetch(urlConParametro, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${userToken}`
-            }
-        })
+    var urlConFiltros = `${apiUrl}${nameMethod}`;
+    var isFirstParam = true;
+    pFiltros.elementos.forEach(filtro => {
+        if (isFirstParam) urlConFiltros = `${urlConFiltros}?`;
+        else urlConFiltros = `${urlConFiltros}&`;
+        urlConFiltros = `${urlConFiltros}${filtro[0]}=${encodeURIComponent(filtro[1])}`;
+        isFirstParam = false;
+    });
+
+    return fetch(urlConFiltros, requestOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.status}`);
             }
             return response.json();
         })
+        .then(data => {
+            return data;
+        })
         .catch(error => {
-            console.error('Error al realizar la solicitud DELETE:', error.message);
+            console.error('Error al recuperar datos:', error.message);
         });
+}
+
+function PatchByFilters(nameMethod, pFiltros) {
+
+    const requestOptions = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userToken}`
+        },
+    }; 
+    var urlConFiltros = `${apiUrl}${nameMethod}`;
+    var isFirstParam = true;
+    pFiltros.elementos.forEach(filtro => {
+        if (isFirstParam) urlConFiltros = `${urlConFiltros}?`; 
+        else urlConFiltros = `${urlConFiltros}&`; 
+        urlConFiltros = `${urlConFiltros}${filtro[0]}=${encodeURIComponent(filtro[1])}`;
+        isFirstParam = false;
+    });
+
+    return fetch(urlConFiltros, requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error en la solicitud: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                return data;
+            })
+            .catch(error => {
+                console.error('Error al recuperar datos:', error.message);
+                throw error;
+            }); 
+}
+
+function Delete(id) {
+
+    var urlConParametro = `${apiUrl}Eliminar/${id}`;
+    return fetch(urlConParametro, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userToken}`
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error en la solicitud: ${response.status}`);
+        }
+        return response.json();
+    })
+    .catch(error => {
+        console.error('Error al realizar la solicitud DELETE:', error.message);
     });
 }
  
 function Post(nameMethod, entidad) {
   
-    document.addEventListener('DOMContentLoaded', () => {
-
-        var url = `${apiUrl}${nameMethod}`;
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(entidad)
+    var url = `${apiUrl}${nameMethod}`;
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(entidad)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error en la solicitud: ${response.status}`);
+            }
+            return response.json();
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error en la solicitud: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Datos recibidos:', data);
-            })
-            .catch(error => {
-                console.error('Error al realizar la solicitud POST:', error.message);
-            });
-    });
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error('Error al realizar la solicitud POST:', error.message);
+        });
 }
 
 function Put(nameMethod, entidad) {
 
-    document.addEventListener('DOMContentLoaded', () => {
-
-        var url = `${apiUrl}${nameMethod}`;
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${userToken}`
-            },
-            body: JSON.stringify(entidad)
+    var url = `${apiUrl}${nameMethod}`;
+    return fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userToken}`
+        },
+        body: JSON.stringify(entidad)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error en la solicitud: ${response.status}`);
+            }
+            return response.json();
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error en la solicitud: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Datos recibidos:', data);
-            })
-            .catch(error => {
-                console.error('Error al realizar la solicitud PUT:', error.message);
-            });
-    });
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error('Error al realizar la solicitud PUT:', error.message);
+        });
 }
