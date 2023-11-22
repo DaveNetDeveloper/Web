@@ -4,9 +4,9 @@
 	<!-- Meta Tags -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="keywords" content="Site keywords here">
-	<meta name="description" content="">
-	<meta name='copyright' content=''>
+	<meta name="keywords" content="login">
+	<meta name="description" content="página para iniciar sesión">
+	<meta name='copyright' content='UOC'>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<!-- Title -->
@@ -42,7 +42,12 @@
 	<link rel="stylesheet" href="./css/style.css">
 	<link rel="stylesheet" href="./css/responsive.css">
 
-	<!-- Load sSripts -->
+	<!-- Modal Panel CSS -->
+	<link rel="stylesheet" href="./css/modalPanel.css">
+
+	<!-- Js Sripts -->
+	<script src="./js/libraries/modalPanel.js"></script>
+
 	<script src="./js/services/usuariosController.js"></script>
 	<script src="./js/libraries/utilities.js"></script>
 	<script src="./js/services/correoController.js"></script>
@@ -65,21 +70,7 @@
 		</div>
 	</div>
 	<!-- End Preloader -->
-	<!-- Get Pro Button -->
-	<!--<ul class="pro-features">
-		<a class="get-pro" href="#">Get Pro</a>
-		<li class="big-title">Pro Version Available on Themeforest</li>
-		<li class="title">Pro Version Features</li>
-		<li>2+ premade home pages</li>
-		<li>20+ html pages</li>
-		<li>Color Plate With 12+ Colors</li>
-		<li>Sticky Header / Sticky Filters</li>
-		<li>Working Contact Form With Google Map</li>
-		<div class="button">
-			<a href="http://preview.themeforest.net/item/mediplus-medical-and-doctor-html-template/full_screen_preview/26665910?_ga=2.145092285.888558928.1591971968-344530658.1588061879" target="_blank" class="btn">Pro Version Demo</a>
-			<a href="https://themeforest.net/item/mediplus-medical-and-doctor-html-template/26665910" target="_blank" class="btn">Buy Pro Version</a>
-		</div>
-	</ul>-->
+
 	<!-- Contenedor para el encabezado -->
 	<div id="headerContainer"></div>
 
@@ -92,123 +83,115 @@
 						<div class="contact-us-form">
 							<h2>Inicia sesión</h2>
 							<p>If you have any questions please fell free to contact with us.</p>
-							<!-- Form -->
-							<!--<form class="form">-->
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<input type="email" name="email" placeholder="Email" required="">
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<input type="password" name="password" placeholder="Contraseña" required="">
-										</div>
-									</div>
-								</div>
-								<!--<div class="col-lg-6">
+							<!-- Form --> 
+							<div class="row">
+								<div class="col-lg-6">
 									<div class="form-group">
-											<input type="text" name="phone" placeholder="Phone" required="">
-										</div>
+										<input type="email" name="email" placeholder="Email" required="">
 									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<input type="text" name="subject" placeholder="Subject" required="">
-										</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<input type="password" name="password" placeholder="Contraseña" required="">
 									</div>
-									<div class="col-lg-12">
-										<div class="form-group">
-											<textarea name="message" placeholder="Your Message" required=""></textarea>
-										</div>
-									</div>-->
-								<div class="row">
-									<div class="col-12">
-										<div class="">
-											<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Do you want to subscribe our Newsletter ?</label>
-										</div>
+								</div>
+							</div> 
+							<div class="row">
+								<div class="col-12">
+									<div class="">
+										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Do you want to subscribe our Newsletter ?</label>
+									</div>
 
-										<div class="form-group login-btn">
-											<button class="btn" type="submit" name="btnLogin">CONTINUAR</button>
-										</div>
+									<div class="form-group login-btn">
+										<button class="btn" type="submit" name="btnLogin">CONTINUAR</button>
 									</div>
 								</div>
-							<!--</form>-->
-								</div>
-						
+							</div> 
+						</div>
+
 						<!--/ End Form -->
 					</div>
-					</div>
 				</div>
-			
-			<!-- <div class="contact-info">
-			<div class="row">-->
-			<!-- single-info -->
-			<!--<div class="col-lg-4 col-12 ">
-				<div class="single-info">
-					<i class="icofont icofont-ui-call"></i>
-					<div class="content">
-						<h3>+(000) 1234 56789</h3>
-						<p>info@company.com</p>
-					</div>
+			</div>
+
+			<br /><br />
+
+
+			<!-- Start Modal Panel -->
+			<span id="modalPanelContainer"></span>
+
+			<button id="abrirModal">Abrir Modal</button>
+			<div id="miModal" class="modal">
+				<div class="modal-contenido">
+					<span class="cerrar" id="cerrarModal">&times;</span>
+					<h3 id="h3Modal" style="text-align: center; margin-top: 3%"></h3>
+					<p id="pModal" style="margin-top: 5%"></p>
 				</div>
-			</div>-->
-			<!--/End single-info -->
-			<!-- single-info -->
-			<!--<div class="col-lg-4 col-12 ">
-				<div class="single-info">
-					<i class="icofont-google-map"></i>
-					<div class="content">
-						<h3>2 Fir e Brigade Road</h3>
-						<p>Chittagonj, Lakshmipur</p>
-					</div>
-				</div>
-			</div>-->
-			<!--/End single-info -->
-			<!-- single-info -->
-			<!--<div class="col-lg-4 col-12 ">
-				<div class="single-info">
-					<i class="icofont icofont-wall-clock"></i>
-					<div class="content">
-						<h3>Mon - Sat: 8am - 5pm</h3>
-						<p>Sunday Closed</p>
-					</div>
-				</div>
-			</div>-->
-			<!--/End single-info -->
-			<!--</div>
-			</div> -->
+			</div>
+			<!--End Modal Panel-->
+
 		</div>
 	</section>
 	<!--/ End Contact Us -->
+
 	<!-- Contenedor para el footer -->
 	<div id="footerContainer"></div>
 
-
-
-
 	<!-- Scripts -->
 	<script type="text/javascript">
-
 		// Cargar encabezado y pie de página
-		cargarContenido('header.html', 'headerContainer');
-		cargarContenido('footer.html', 'footerContainer');
+		cargarContenidoHtml('header.html', 'headerContainer');
+		cargarContenidoHtml('footer.html', 'footerContainer');
+
+		//cargarContenidoHtml('modal-panel.html', 'modalPanelContainer');
 	</script>
+
+	<script type="text/javascript">
+		cargarContenidoModal('Título', 'Contenido del modal...');
+	</script>
+
+
+	<script type="text/javascript">
+		var url = new URL(window.location.href);// Obtener la URL actual
+		var params = new URLSearchParams(url.search);// Crear un objeto URLSearchParams
+		var parametro = params.get('qrCode');// Obtener el valor de un parámetro específico por su nombre
+
+		// TODO en la Landing QR: check code in qr table
+		// la landing QR nos envia el parametro qrCode
+		// si existe y está activo y no está expirado
+		// obtenemos los datos del producto relacionado
+		// después del login del usuario o de chequear que la cuenta está iniciada
+		// creamos la transaccion de puntos del usuario
+
+
+		//alert("Parámetro [qrCode]: " + parametro);
+		console.log("Parámetro [qrCode]: " + parametro);
+
+	</script>
+
 
 	<script type="text/javascript">
 
 		var emailValue = getInputValueByName('email');
-        var passwordValue = getInputValueByName('password');
+		var passwordValue = getInputValueByName('password');
 
-        setInputValueByName('email', 'david@correo.com');
-        setInputValueByName('password', 'nuevaPassword!');
+		setInputValueByName('email', 'david@correo.com');
+		setInputValueByName('password', 'nuevaPassword!');
 
 	</script>
-	<script>
+
+	<script type="text/javascript">
 
 		//Establecer el comportamiento del click del boton de 'login'
 		function onClickBtnLogin() {
+
+			//redirecToPage('index.html');
+			//window.location.assign('index.html');
+
+			//refreshPage();
+			//window.location.href = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
 
 			const loginParams = new Filtros();
 			loginParams.agregarElemento('email', 'david@correo.com');
@@ -216,23 +199,24 @@
 			var password = 'a43eb9231a63e870a6c359495762cc2fb2b788d4b0d6948436e0d113fa3fdcd2';
 			loginParams.agregarElemento('contraseña', password);
 
-			PatchByFilters('Login', loginParams)
+			/*PatchByFilters('Login', loginParams)
 				.then(data => {
 
-                    alert("Hola " + data.nombre + " " + data.correo + "!"); 
-					enviarCorreo(data.correo);
+			alert("Hola " + data.nombre + " " + data.correo + "!");
+			enviarCorreo(data.correo, 0);
 				})
 				.catch(error => {
-					console.error('Error fuera de la función:', error);
-				});
+			console.error('Error fuera de la función:', error);
+				});*/
+
 
 			/*calcularHash(password)
 				.then(hash => {
-					loginParams.agregarElemento('contraseña', hash);
-					PatchByFilters('Login', loginParams);
+			loginParams.agregarElemento('contraseña', hash);
+			PatchByFilters('Login', loginParams);
 				})
 				.catch(error => {
-					console.error('Error al calcular el hash:', error);
+			console.error('Error al calcular el hash:', error);
 					//alert("Error al calcular el hash: " + error);
 				});*/
 
@@ -240,6 +224,7 @@
 
 		const btnLogin = document.querySelector('button[name="btnLogin"]');
 		btnLogin.addEventListener('click', onClickBtnLogin);
+
 	</script>
 
 	<!-- Load Scripts -->

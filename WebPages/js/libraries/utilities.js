@@ -47,7 +47,7 @@ function getCookie(nombre) {
 }
 
 // Función para cargar contenido desde un archivo
-async function cargarContenido(url, contenedorId) {
+async function cargarContenidoHtml(url, contenedorId) {
     const response = await fetch(url);
     const contenido = await response.text();
     document.getElementById(contenedorId).innerHTML = contenido;
@@ -63,4 +63,19 @@ function getInputValueByName(name) {
 function setInputValueByName(name, value) {
     const emailInput = document.querySelector('input[name="' + name + '"]');
     emailInput.value = value;
+}
+
+// para navegación a una página
+function redirectToPage(page) {
+    window.location.assign(page);
+}
+
+// para recargar una página
+function refreshPage() {
+    window.location.href = getCurrentPage();
+}
+
+function getCurrentPage() {
+    var rutaActual = window.location.pathname;
+    return rutaActual.substring(rutaActual.lastIndexOf('/') + 1);
 }

@@ -2,7 +2,7 @@
 //
 // Proxis con los web services del controlador
 //
-function enviarCorreo(email) {
+function enviarCorreo(email, tipoEnvio) {
 
     const baseUrl = `https://localhost`;
     const controllerName = `Correo`;
@@ -13,7 +13,8 @@ function enviarCorreo(email) {
     const data = {
         Destinatario: email,
         Asunto: "Test",
-        Cuerpo: "Test"
+        Cuerpo: "Test",
+        TipoEnvio: tipoEnvio
     };
 
     const requestOptions = {
