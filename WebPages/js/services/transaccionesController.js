@@ -1,76 +1,64 @@
 ﻿//
 // Constantes
 //
-const baseUrl = `https://localhost`;
-const controllerName = `Usuarios`;
-const port = `7161`;
-const apiUrl = `${baseUrl}:${port}/${controllerName}/`;
+const baseUrl2 = `https://localhost`;
+const controllerName2 = `Transacciones`;
+const port2 = `7161`;
+const apiUrl2 = `${baseUrl2}:${port2}/${controllerName2}/`;
 
-var userToken = "qAGlDm9o9oS1Ir+xNlWk3XXHkJy/+nJmBy3KUPoms2w="; // TODO: cambiar por valor de la cookie
+//var userToken = "qAGlDm9o9oS1Ir+xNlWk3XXHkJy/+nJmBy3KUPoms2w="; // TODO: cambiar por valor de la cookie
 
-
-const controllerActions = [
-    'ObtenerUsuarioById',
-    'CrearUsuario',
-    'ObtenerUsuarioByEmail',
-    'ObtenerUsuarios',
-    'ActualizarUsuario',
-    'Login',
-    'CambiarContraseña',
-    'ValidarCuenta',
-    'ActivacionSuscripcion',
+/*const controllerActions = [
+    'ObtenerTransaccion',
+    'ObtenerTransaccionByName',
+    'ObtenerTransacciones',
+    'CrearTransaccion',
+    'ActualizarTransaccion',
     'Eliminar'
-];
+];*/
  
 //
 // Clases
 //
-class Usuario {
+class Transaccion {
 
-    constructor(id, nombre, apellidos, correo, activo, contraseña, fechaNacimiento, suscrito, fechaCreacion, puntos) {
+    constructor(id, nombre, idUsuario, fecha, puntos, idProducto) {
         this.id = id;
         this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.correo = correo, 
-        this.activo = activo,
-        this.contraseña = contraseña,
-        this.fechaNacimiento = fechaNacimiento,
-        this.suscrito = suscrito,
-        this.fechaCreacion = fechaCreacion,
-        this.ultimaConexion = null,
-        this.puntos = puntos,
-        this.token = null,
-        this.expiracionToken = null
+        this.idUsuario = idUsuario;
+        this.fecha = fecha,
+            this.puntos = puntos,
+            this.idProducto = idProducto
     }
     metodo() {
-        //console.log(`Hola, soy ${this.nombre} y tengo ${this.puntos} puntos.`);
+        //console.log(`Transacción ${this.nombre} con ${this.puntos} puntos.`);
     }
 }
 
-class Filtros {
+/*class Filtros {
     constructor() {
-        this.elementos = [];  // Propiedad bidimensional para almacenar elementos con clave/valor
+        this.elementos = [];  
     }
-    agregarElemento(clave, valor) { // Método para agregar un elemento con clave/valor al array bidimensional
+    agregarElemento(clave, valor) { 
         this.elementos.push([clave, valor]);
     }
-    obtenerValor(clave) { // Método para obtener el valor asociado a una clave
+    obtenerValor(clave) { 
         const elementoEncontrado = this.elementos.find(elemento => elemento[0] === clave);
         return elementoEncontrado ? elementoEncontrado[1] : undefined;
     }
-    imprimirElementos() { // Método para imprimir todos los elementos por consola
+    imprimirElementos() { 
         this.elementos.forEach(elemento => {
             console.log(`Clave: ${elemento[0]}, Valor: ${elemento[1]}`);
         });
     }
-}; 
+};*/ 
 
 //
-// Proxis con los web services del controlador 
+// Proxies con los web services del controlador 
 //
-function Get(id) {
+function GetTransaccion(id) {
 
-    var nameMethod = "ObtenerUsuario";
+    var nameMethod = "ObtenerTransaccion";
  
     const requestOptions = {
         method: 'GET',
@@ -90,11 +78,6 @@ function Get(id) {
             return response.json();
         })
         .then(entidad => {
-            const listaUsuarios = document.getElementById('lista-usuarios');
-            const listItem = document.createElement('li');
-            listItem.textContent = `${entidad.id}: ${entidad.nombre}`;
-            listaUsuarios.appendChild(listItem);
-
             return entidad;
         })
         .catch(error => {
@@ -102,7 +85,7 @@ function Get(id) {
         }); 
 }
 
-function GetAll() {
+function GetTransacciones() {
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -110,7 +93,7 @@ function GetAll() {
             'Authorization': `Bearer ${userToken}`
         },
     };
-    const url = `${apiUrl}ObtenerUsuarios`;
+    const url = `${apiUrl}ObtenerTransacciones`;
     return fetch(url, requestOptions)
         .then(response => {
             if (!response.ok) {
@@ -127,7 +110,7 @@ function GetAll() {
         });
 }
 
-function GetByFilters(nameMethod, pFiltros) {
+function GetTransaccionByFilters(nameMethod, pFiltros) {
 
     const requestOptions = {
         method: 'GET',
@@ -161,7 +144,7 @@ function GetByFilters(nameMethod, pFiltros) {
         });
 }
 
-function PatchByFilters(nameMethod, pFiltros) {
+function PatchTransaccionByFilters(nameMethod, pFiltros) {
 
     const requestOptions = {
         method: 'PATCH',
@@ -196,7 +179,7 @@ function PatchByFilters(nameMethod, pFiltros) {
             }); 
 }
 
-function Delete(id) {
+function DeleteTransaccion(id) {
 
     var urlConParametro = `${apiUrl}Eliminar/${id}`;
     return fetch(urlConParametro, {
@@ -217,10 +200,10 @@ function Delete(id) {
     });
 }
  
-function Post(nameMethod, entidad) {
+function PostTransaccion(nameMethod, entidad) {
   
-    var url = `${apiUrl}${nameMethod}`;
-    return fetch(url, {
+    var url2 = `${apiUrl2}${nameMethod}`;
+    return fetch(url2, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -241,7 +224,7 @@ function Post(nameMethod, entidad) {
         });
 }
 
-function Put(nameMethod, entidad) {
+function PutTransaccion(nameMethod, entidad) {
 
     var url = `${apiUrl}${nameMethod}`;
     return fetch(url, {
@@ -264,12 +247,4 @@ function Put(nameMethod, entidad) {
         .catch(error => {
             console.error('Error al realizar la solicitud PUT:', error.message);
         });
-}
-
-function CloseSession() {
-
-    // borrar la cookie de sesión de usuario
-
-    // redirigir a la Home Pública
-
-}
+} 

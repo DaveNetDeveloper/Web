@@ -45,6 +45,7 @@
     <script src="./js/services/usuariosController.js"></script>
     <script src="./js/libraries/utilities.js"></script>
     <script src="./js/services/correoController.js"></script>
+    <script src="./js/services/transaccionesController.js"></script>
 </head>
 <body>
     <!-- Preloader -->
@@ -212,6 +213,17 @@
                 null);
             return formUser;
         }
+        
+        function crearTransaccion(idUser) { 
+
+            return new Transaccion(
+                null,
+                "Puntos de bienvenida",
+                idUser,
+                null,
+                300,
+                null);
+        } 
 
     </script>
 
@@ -228,20 +240,19 @@
                     newUser.contraseña = hash;
                     Post('CrearUsuario', newUser)
                         .then(data => {
-
-                            //TODO: enviar correo de validación de la nueva cuenta
-
-
-                            enviarCorreo(data.correo, 0); // ValidaciónCuenta
-
-
-
-
-
-                            //redirectToPage('registerConfirmation.html?email=' + data.correo);
+                                
+                            var transaccion = crearTransaccion(data.id);
+                            PostTransaccion("CrearTransaccion", transaccion)
+                                .then(t => {
+                                    enviarCorreo(newUser.correo, 0); // ValidaciónCuenta
+                                    redirectToPage('registerConfirmation.html?email=' + newUser.correo);
+                                })
+                                .catch(error => {
+                                    console.error('Error fuera de la función PostTransaccion:', error);
+                                });   
                         })
                         .catch(error => {
-                            console.error('Error fuera de la función:', error);
+                            console.error('Error fuera de la función CrearUsuario:', error);
                         });
                 });
             }
