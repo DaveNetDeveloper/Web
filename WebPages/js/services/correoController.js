@@ -12,9 +12,9 @@ function enviarCorreo(email, tipoEnvio) {
      
     const data = {
         Destinatario: email,
-        Asunto: "Test",
-        Cuerpo: "Test",
-        TipoEnvio: tipoEnvio
+        TipoEnvio: tipoEnvio,
+        Asunto: "",
+        Cuerpo: ""
     };
 
     const requestOptions = {
@@ -31,7 +31,7 @@ function enviarCorreo(email, tipoEnvio) {
             console.log(data);
         })
         .catch(error => {
-            console.error('Error al llamar al servicio web:', error);
+            console.error('Error al llamar al servicio web ' + controllerName + '/' + action + ': ', error);
             throw error;
         });
 }

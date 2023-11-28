@@ -6,8 +6,22 @@ const controllerName = `Usuarios`;
 const port = `7161`;
 const apiUrl = `${baseUrl}:${port}/${controllerName}/`;
 
-var userToken = "iqSSXsiTBZuRkHI+nIjhDGtm9MVoWSNhhT8v2EwCeSw="; // TODO: cambiar por valor de la cookie
+var userToken = "qAGlDm9o9oS1Ir+xNlWk3XXHkJy/+nJmBy3KUPoms2w="; // TODO: cambiar por valor de la cookie
 
+
+const controllerActions = [
+    'ObtenerUsuarioById',
+    'CrearUsuario',
+    'ObtenerUsuarioByEmail',
+    'ObtenerUsuarios',
+    'ActualizarUsuario',
+    'Login',
+    'CambiarContraseña',
+    'ValidarCuenta',
+    'ActivacionSuscripcion',
+    'Eliminar'
+];
+ 
 //
 // Clases
 //
@@ -153,7 +167,7 @@ function PatchByFilters(nameMethod, pFiltros) {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${userToken}`
+            'Authorization': `Bearer qAGlDm9o9oS1Ir+xNlWk3XXHkJy/+nJmBy3KUPoms2w=`
         },
     }; 
     var urlConFiltros = `${apiUrl}${nameMethod}`;
@@ -177,7 +191,8 @@ function PatchByFilters(nameMethod, pFiltros) {
             })
             .catch(error => {
                 console.error('Error al recuperar datos:', error.message);
-                throw error;
+                //throw error;
+                return error;
             }); 
 }
 
@@ -211,17 +226,18 @@ function Post(nameMethod, entidad) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(entidad)
-    })
+        })
         .then(response => {
             if (!response.ok) {
+                alert("ko");
                 throw new Error(`Error en la solicitud: ${response.status}`);
-            }
+            } 
             return response.json();
         })
-        .then(data => {
+        .then(data => { 
             return data;
         })
-        .catch(error => {
+        .catch(error => { 
             console.error('Error al realizar la solicitud POST:', error.message);
         });
 }
@@ -240,13 +256,21 @@ function Put(nameMethod, entidad) {
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.status}`);
-            }
+            } 
             return response.json();
         })
-        .then(data => {
+        .then(data => { 
             return data;
         })
         .catch(error => {
             console.error('Error al realizar la solicitud PUT:', error.message);
         });
+}
+
+function CloseSession() {
+
+    // borrar la cookie de sesión de usuario
+
+    // redirigir a la Home Pública
+
 }

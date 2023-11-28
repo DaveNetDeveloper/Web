@@ -55,14 +55,19 @@ async function cargarContenidoHtml(url, contenedorId) {
 
 //
 function getInputValueByName(name) {
-    const emailInput = document.querySelector('input[name="' + name + '"]');
-    return emailInput.value;
+    const input = document.querySelector('input[name="' + name + '"]');
+    return input.value;
+}
+
+function getCheckboxValueByName(name) {
+    const input = document.querySelector('input[name="' + name + '"]');
+    return input.checked;
 }
 
 //
 function setInputValueByName(name, value) {
-    const emailInput = document.querySelector('input[name="' + name + '"]');
-    emailInput.value = value;
+    const input = document.querySelector('input[name="' + name + '"]');
+    input.value = value;
 }
 
 // para navegación a una página
@@ -75,7 +80,29 @@ function refreshPage() {
     window.location.href = getCurrentPage();
 }
 
+//
 function getCurrentPage() {
     var rutaActual = window.location.pathname;
     return rutaActual.substring(rutaActual.lastIndexOf('/') + 1);
+}
+
+//
+function getCurrentDateTime() {
+
+    var fechaHoraActual = new Date();
+
+    var año = fechaHoraActual.getFullYear();
+    var mes = fechaHoraActual.getMonth() + 1;
+    var dia = fechaHoraActual.getDate();
+    var horas = fechaHoraActual.getHours();
+    var minutos = fechaHoraActual.getMinutes();
+    var segundos = fechaHoraActual.getSeconds();
+
+    var fechaFormateada = año + '-' + mes + '-' + dia;
+    var horaFormateada = horas + ':' + minutos + ':' + segundos;
+
+    //console.log('Fecha actual:', fechaFormateada);
+    //console.log('Hora actual:', horaFormateada);
+
+    return fechaFormateada + ' ' + horaFormateada;
 }
