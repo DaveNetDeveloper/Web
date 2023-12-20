@@ -29,6 +29,8 @@ function cargarContenidoModal(titulo, mensaje) {
 	var pElement = document.getElementById('pModal');
 	var h3Element = document.getElementById('h3Modal');
 
-	pElement.textContent = titulo;
-	h3Element.textContent = mensaje;
+	pElement.textContent = mensaje;
+	h3Element.textContent = titulo;
+
+
 }

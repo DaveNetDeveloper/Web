@@ -1,8 +1,5 @@
-﻿//
+﻿
 // Encriptar
-//
-
-//
 async function calcularHash(cadena) {
     // Convierte la cadena en un array de bytes (codificación UTF-8)
     const buffer = new TextEncoder().encode(cadena);
@@ -70,6 +67,16 @@ function setInputValueByName(name, value) {
     input.value = value;
 }
 
+function setInputHtmlByName(name, value) {
+    const input = document.getElementsByName(name);
+    input[0].innerHTML = value;
+}
+
+function setBackgroundImageByName(name, value) {
+    const input = document.getElementsByName(name);
+    input[0].style.backgroundImage = "url(img/entidades/" + value + ")";
+}
+
 // para navegación a una página
 function redirectToPage(page) {
     window.location.assign(page);
@@ -88,7 +95,6 @@ function getCurrentPage() {
 
 //
 function getCurrentDateTime() {
-
     var fechaHoraActual = new Date();
 
     var año = fechaHoraActual.getFullYear();
@@ -106,3 +112,35 @@ function getCurrentDateTime() {
 
     return fechaFormateada + ' ' + horaFormateada;
 }
+
+//
+class Filtros {
+    constructor() {
+        this.elementos = [];  
+    }
+    agregarElemento(clave, valor) { 
+        this.elementos.push([clave, valor]);
+    }
+    obtenerValor(clave) {
+        const elementoEncontrado = this.elementos.find(elemento => elemento[0] === clave);
+        return elementoEncontrado ? elementoEncontrado[1] : undefined;
+    }
+    imprimirElementos() {
+        this.elementos.forEach(elemento => {
+            console.log(`Clave: ${elemento[0]}, Valor: ${elemento[1]}`);
+        });
+    }
+};
+
+//
+function isExpiredDate(date) {
+    const fecha = new Date(date);
+    const fechaActual = new Date();
+    return fecha < fechaActual;
+}
+
+//
+function replaceTextByTagId(tagId, tagText, newText) {
+    var element = document.getElementById(tagId);
+    element.textContent = element.textContent.replace(tagText, newText);
+} 

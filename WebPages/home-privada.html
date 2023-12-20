@@ -1,0 +1,780 @@
+<!doctype html>
+<html class="no-js" lang="TODO">
+<head>
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="TODO">
+	<meta name="description" content="Home pública TODO">
+	<meta name='copyright' content='TODO'>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Title -->
+	<title>Inicio</title>  <!--TODO-->
+	<!-- Favicon -->
+	<link rel="icon" href="img/favicon.png"> <!--TODO-->
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/./css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+	<!-- Nice Select ./css -->
+	<link rel="stylesheet" href="./css/nice-select.css">
+	<!-- Font Awesome CSS -->
+	<link rel="stylesheet" href="./css/font-awesome.min.css">
+	<!-- icofont CSS -->
+	<link rel="stylesheet" href="./css/icofont.css">
+	<!-- Slicknav -->
+	<link rel="stylesheet" href="./css/slicknav.min.css">
+	<!-- Owl Carousel CSS -->
+	<link rel="stylesheet" href="./css/owl-carousel.css">
+	<!-- Datepicker CSS -->
+	<link rel="stylesheet" href="./css/datepicker.css">
+	<!-- Animate CSS -->
+	<link rel="stylesheet" href="./css/animate.min.css">
+	<!-- Magnific Popup CSS -->
+	<link rel="stylesheet" href="./css/magnific-popup.css">
+
+	<!-- Medipro CSS -->
+	<link rel="stylesheet" href="./css/normalize.css">
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="./css/responsive.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+	<script src="./js/services/entidadesController.js"></script>
+	<script src="./js/services/FAQSController.js"></script>
+	<script src="./js/services/testimoniosController.js"></script>
+	<script src="./js/libraries/utilities.js"></script>
+
+	<style>
+		body {
+			font-family: 'Arial', sans-serif;
+			/*   margin-right: 20px;
+			margin-left: 20px;
+			margin-bottom: 20px; */
+		}
+
+		.panel {
+			background-color: #f8f8f8;
+			border: 1px solid #ddd;
+			margin-bottom: 10px;
+			border-radius: 5px;
+			overflow: hidden;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		.pregunta {
+			padding: 15px;
+			cursor: pointer;
+			background-color: #3498db;
+			color: #fff;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.respuesta {
+			padding: 15px;
+			display: none;
+			text-align: left;
+			transition: all 1s;
+		}
+
+		.flecha {
+			font-size: 20px;
+		}
+
+		@media (max-width: 600px) {
+			.pregunta {
+				font-size: 16px;
+			}
+		}
+
+	</style>
+
+</head>
+<body>
+
+
+
+	<!-- Preloader -->
+	<div class="preloader">
+		<div class="loader">
+			<div class="loader-outter"></div>
+			<div class="loader-inner"></div>
+
+			<div class="indicator">
+				<svg width="16px" height="12px">
+					<polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+					<polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+				</svg>
+			</div>
+		</div>
+	</div>
+	<!-- End Preloader -->
+	<!-- Header Area -->
+	<header class="header">
+		<!-- Header Inner -->
+		<div class="header-inner">
+			<div class="container">
+				<div class="inner" style="padding: 18px;">
+					<div class="row" style="margin-left: 41%;">
+						<div>
+							<!-- Start Logo -->
+							<div class="logo">
+								<a href="index.html"><img src="img/logo.png" alt="#"></a>
+							</div>
+							<!-- End Logo -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!--/ End Header Inner -->
+	</header>
+	<!-- End Header Area -->
+
+
+	<!-- Start Newsletter Area -->
+	<section class="newsletter section">
+		<div class="container">
+			<div class="row ">
+				<div class="col-lg-6  col-12">
+					<!-- Start Newsletter Form -->
+					<div class="subscribe-text ">
+						<h6>Explora tu entorno</h6>
+						<p class="">Descubre entidades cercanas.</p>
+					</div>
+					<!-- End Newsletter Form -->
+				</div>
+				<div class="col-lg-6  col-12">
+					<!-- Start Newsletter Form -->
+					<div class="subscribe-form ">
+						<div  class="newsletter-inner">
+							<input id="textEntidad" name="textEntidad" placeholder="Buscar entidad" class="common-input" onfocus="this.placeholder = ''"
+								   onblur="this.placeholder = 'Buscar entidad'" type="text">
+							<button id="btnBuscarEntidad" class="btn" onclick="redirigir()">BUSCAR</button>
+						</div>
+					</div>
+					<!-- End Newsletter Form -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /End Newsletter Area -->
+
+
+	<script>
+		function redirigir() {
+			// Obtener el valor del input
+			const textEntidadValue = document.getElementById('textEntidad').value;
+
+			if (textEntidadValue.trim() === '' || !/^[a-zA-Z0-9_ ]{3,}$/.test(textEntidadValue)) {
+				alert('Por favor, ingrese un valor válido para la búsqueda.');
+			}
+			else {
+				// Redirigir a la página explorar.html con el parámetro en la URL
+                window.location.href = `explorar.html?textSearch=${encodeURIComponent(textEntidadValue)}`;
+			}
+		}
+	</script>
+
+
+	<!-- Pricing Table -->
+	<section class="pricing-table section">
+		<div class="container">
+			<!--<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title">
+						<h2>We Provide You The Best Treatment In Resonable Price</h2>-->
+			<!--<img src="img/section-img.png" alt="#">-->
+			<!--<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+					</div>
+				</div>
+			</div>-->
+			<div class="row">
+				<!-- Single Table -->
+				<div class="col-lg-6 col-md-12 col-12">
+					<div class="single-table">
+						<!-- Table Head -->
+						<div class="table-head">
+							<div class="icon">
+								<i class="icofont icofont-ui-cut"></i>
+							</div>
+							<h4 class="title">Comercios y locales</h4>
+
+						</div>
+						<p>Lorem ipsum dolor sit,cubitur sollicitudin fentum,Nullam interdum enim.</p>
+						<div class="table-bottom">
+							<a class="btn" href="#">EXPLORAR COMERCIOS</a>
+						</div>
+						<!-- Table Bottom -->
+					</div>
+				</div>
+				<!-- End Single Table-->
+				<!-- Single Table -->
+				<div class="col-lg-6 col-md-12 col-12">
+					<div class="single-table">
+						<!-- Table Head -->
+						<div class="table-head">
+							<div class="icon">
+								<i class="icofont icofont-tooth"></i>
+							</div>
+							<h4 class="title">Asociaciones Culturales</h4>
+
+						</div>
+						<p>Lorem ipsum dolor sit,cubitur sollicitudin fentum,Nullam interdum enim.</p>
+						<div class="table-bottom">
+							<a class="btn" href="#">EXPLORAR ASOCIACIONES</a>
+						</div>
+						<!-- Table Bottom -->
+					</div>
+				</div>
+				<!-- End Single Table-->
+
+			</div>
+		</div>
+	</section>
+	<!--/ End Pricing Table -->
+	<!-- Start Feautes -->
+	<section class="Feautes section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title">
+						<h2>Descubre entidades en tu barrio y crea nuevas conexiones</h2>
+						<!--<img src="img/section-img.png" alt="#">
+						<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>-->
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-12">
+					<!-- Start Single features -->
+					<div class="single-features">
+						<div class="signle-icon">
+							<i class="icofont icofont-ambulance-cross"></i>
+						</div>
+						<h3>Emergency Help</h3>
+						<p>Lorem ipsum sit, consectetur adipiscing elit. Maecenas mi quam vulputate.</p>
+					</div>
+					<!-- End Single features -->
+				</div>
+				<div class="col-lg-4 col-12">
+					<!-- Start Single features -->
+					<div class="single-features">
+						<div class="signle-icon">
+							<i class="icofont icofont-medical-sign-alt"></i>
+						</div>
+						<h3>Enriched Pharmecy</h3>
+						<p>Lorem ipsum sit, consectetur adipiscing elit. Maecenas mi quam vulputate.</p>
+					</div>
+					<!-- End Single features -->
+				</div>
+				<div class="col-lg-4 col-12">
+					<!-- Start Single features -->
+					<div class="single-features last">
+						<div class="signle-icon">
+							<i class="icofont icofont-stethoscope"></i>
+						</div>
+						<h3>Medical Treatment</h3>
+						<p>Lorem ipsum sit, consectetur adipiscing elit. Maecenas mi quam vulputate.</p>
+					</div>
+					<!-- End Single features -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--/ End Feautes -->
+	<!-- Start Fun-facts -->
+	<div id="fun-facts" class="fun-facts section overlay">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-6 col-12">
+					<!-- Start Single Fun -->
+					<div class="single-fun">
+						<i class="icofont icofont-home"></i>
+						<div class="content">
+							<span class="counter">3468</span>
+							<p>Hospital Rooms</p>
+						</div>
+					</div>
+					<!-- End Single Fun -->
+				</div>
+				<div class="col-lg-3 col-md-6 col-12">
+					<!-- Start Single Fun -->
+					<div class="single-fun">
+						<i class="icofont icofont-user-alt-3"></i>
+						<div class="content">
+							<span class="counter">557</span>
+							<p>Specialist Doctors</p>
+						</div>
+					</div>
+					<!-- End Single Fun -->
+				</div>
+				<div class="col-lg-3 col-md-6 col-12">
+					<!-- Start Single Fun -->
+					<div class="single-fun">
+						<i class="icofont-simple-smile"></i>
+						<div class="content">
+							<span class="counter">4379</span>
+							<p>Happy Patients</p>
+						</div>
+					</div>
+					<!-- End Single Fun -->
+				</div>
+				<div class="col-lg-3 col-md-6 col-12">
+					<!-- Start Single Fun -->
+					<div class="single-fun">
+						<i class="icofont icofont-table"></i>
+						<div class="content">
+							<span class="counter">32</span>
+							<p>Years of Experience</p>
+						</div>
+					</div>
+					<!-- End Single Fun -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/ End Fun-facts -->
+	<!-- Start Why choose -->
+	<section class="why-choose section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title">
+						<h2>We Offer Different Services To Improve Your Health</h2>
+						<img src="img/section-img.png" alt="#">
+						<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6 col-12">
+					<!-- Start Choose Left -->
+					<div class="choose-left">
+						<h3>Who We Are</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pharetra antege vel est lobortis, a commodo magna rhoncus. In quis nisi non emet quam pharetra commodo. </p>
+						<p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+						<div class="row">
+							<div class="col-lg-6">
+								<ul class="list">
+									<li><i class="fa fa-caret-right"></i>Maecenas vitae luctus nibh. </li>
+									<li><i class="fa fa-caret-right"></i>Duis massa massa.</li>
+									<li><i class="fa fa-caret-right"></i>Aliquam feugiat interdum.</li>
+								</ul>
+							</div>
+							<div class="col-lg-6">
+								<ul class="list">
+									<li><i class="fa fa-caret-right"></i>Maecenas vitae luctus nibh. </li>
+									<li><i class="fa fa-caret-right"></i>Duis massa massa.</li>
+									<li><i class="fa fa-caret-right"></i>Aliquam feugiat interdum.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- End Choose Left -->
+				</div>
+				<div class="col-lg-6 col-12">
+					<!-- Start Choose Rights -->
+					<div class="choose-right">
+						<div class="video-image">
+							<!-- Video Animation -->
+							<div class="promo-video">
+								<div class="waves-block">
+									<div class="waves wave-1"></div>
+									<div class="waves wave-2"></div>
+									<div class="waves wave-3"></div>
+								</div>
+							</div>
+							<!--/ End Video Animation -->
+							<a href="https://www.youtube.com/watch?v=RFVXy6CRVR4" class="video video-popup mfp-iframe"><i class="fa fa-play"></i></a>
+						</div>
+					</div>
+					<!-- End Choose Rights -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--/ End Why choose -->
+	<!-- Start Call to action -->
+	<section class="call-action overlay" data-stellar-background-ratio="0.5">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-12">
+					<div class="content">
+						<h2>Do you need Emergency Medical Care? Call @ 1234 56789</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor dictum turpis nec gravida.</p>
+						<div class="button">
+							<a href="#" class="btn">Contact Now</a>
+							<a href="#" class="btn second">Learn More<i class="fa fa-long-arrow-right"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--/ End Call to action -->
+	<!-- Start portfolio -->
+	<section class="portfolio section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title">
+						<h2>We Maintain Cleanliness Rules Inside Our Hospital</h2>
+						<img src="img/section-img.png" alt="#">
+						<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12 col-12">
+					<div id="panelImages" class="owl-carousel portfolio-slider">
+						<!--<div class="single-pf">
+							<img src="img/fotos/Ana-lopez-3.jpg" alt="#">
+							<a href="portfolio-details.html" class="btn">View Details</a>
+						</div>
+						<div class="single-pf">
+							<img src="img/fotos/bodegueta-interior.jpg" alt="#">
+							<a href="portfolio-details.html" class="btn">View Details</a>
+						</div>
+						<div class="single-pf">
+							<img src="img/fotos/Delyns-Sant-Andreu-10.jpg" alt="#">
+							<a href="portfolio-details.html" class="btn">View Details</a>
+						</div>
+						<div class="single-pf">
+							<img src="img/fotos/DSC6497.jpg" alt="#">
+							<a href="portfolio-details.html" class="btn">View Details</a>
+						</div>
+						<div class="single-pf">
+							<img src="img/fotos/DSC6502.jpg" alt="#">
+							<a href="portfolio-details.html" class="btn">View Details</a>
+						</div>
+						<div class="single-pf">
+							<img src="img/fotos/Santa-Cafeïna-Sant-Andreu-1.jpg" alt="#">
+							<a href="portfolio-details.html" class="btn">View Details</a>
+						</div>
+						<div class="single-pf">
+							<img src="img/fotos/Santa-Cafeïna-Sant-Andreu-2.jpg" alt="#">
+							<a href="portfolio-details.html" class="btn">View Details</a>
+						</div>
+						<div class="single-pf">
+							<img src="img/fotos/Xerigot-4-scaled.jpg" alt="#">
+							<a href="portfolio-details.html" class="btn">View Details</a>
+						</div>-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+
+		const imagenes = [
+			'foto1.jpg',
+			'foto2.jpg',
+			'foto3.jpg',
+			'foto4.jpg',
+			'foto5.jpg',
+			'foto6.jpg',
+			'foto7.jpg',
+			'foto8.jpg'
+		];
+
+		for (const url of imagenes) {
+
+			// Crear elementos HTML con JavaScript
+			const singlePfDiv = document.createElement('div');
+			singlePfDiv.className = 'single-pf';
+
+			const image = document.createElement('img');
+			image.src = 'img/fotos/' + url;
+			image.alt = '#';
+
+			const detailsLink = document.createElement('a');
+			detailsLink.href = 'portfolio-details.html';
+			detailsLink.className = 'btn';
+			detailsLink.textContent = 'View Details';
+
+			// Agregar los elementos al contenedor
+			singlePfDiv.appendChild(image);
+			singlePfDiv.appendChild(detailsLink);
+
+			// Agregar el contenedor al cuerpo del documento
+			document.getElementById("panelImages").appendChild(singlePfDiv);
+		}
+
+	</script>
+
+	<!--/ End portfolio -->
+	<!-- Start service -->
+	<section class="services section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title">
+						<h2>We Offer Different Services To Improve Your Health</h2>
+						<img src="img/section-img.png" alt="#">
+						<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-12">
+					<!-- Start Single Service -->
+					<div class="single-service">
+						<i class="icofont icofont-prescription"></i>
+						<h4><a href="service-details.html">General Treatment</a></h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut imperdiet. </p>
+					</div>
+					<!-- End Single Service -->
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<!-- Start Single Service -->
+					<div class="single-service">
+						<i class="icofont icofont-tooth"></i>
+						<h4><a href="service-details.html">Teeth Whitening</a></h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut imperdiet. </p>
+					</div>
+					<!-- End Single Service -->
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<!-- Start Single Service -->
+					<div class="single-service">
+						<i class="icofont icofont-heart-alt"></i>
+						<h4><a href="service-details.html">Heart Surgery</a></h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut imperdiet. </p>
+					</div>
+					<!-- End Single Service -->
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<!-- Start Single Service -->
+					<div class="single-service">
+						<i class="icofont icofont-listening"></i>
+						<h4><a href="service-details.html">Ear Treatment</a></h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut imperdiet. </p>
+					</div>
+					<!-- End Single Service -->
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<!-- Start Single Service -->
+					<div class="single-service">
+						<i class="icofont icofont-eye-alt"></i>
+						<h4><a href="service-details.html">Vision Problems</a></h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut imperdiet. </p>
+					</div>
+					<!-- End Single Service -->
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<!-- Start Single Service -->
+					<div class="single-service">
+						<i class="icofont icofont-blood"></i>
+						<h4><a href="service-details.html">Blood Transfusion</a></h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut imperdiet. </p>
+					</div>
+					<!-- End Single Service -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--/ End service -->
+
+
+
+
+
+
+	<div id="FAQS" class="section-title"></div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+	<script>
+
+		// Función para generar dinámicamente el código HTML de un panel FAQ
+		function crearPanel(id, pregunta, respuesta) {
+			const panel = document.createElement('div');
+			panel.className = 'panel';
+
+			const preguntaDiv = document.createElement('div');
+			preguntaDiv.className = 'pregunta';
+			preguntaDiv.innerHTML = `<span>${pregunta}</span><i class="fas fa-chevron-down flecha"></i>`;
+			preguntaDiv.onclick = function () {
+				togglePanel(id - 1);
+			};
+
+			const respuestaDiv = document.createElement('div');
+			respuestaDiv.className = 'respuesta';
+			respuestaDiv.textContent = respuesta;
+
+			panel.appendChild(preguntaDiv);
+			panel.appendChild(respuestaDiv);
+
+			document.getElementById("FAQS").appendChild(panel);
+		}
+
+		// Función para cambiar la visibilidad de un panel
+		function togglePanel(panelId) {
+
+			const respuesta = document.getElementsByClassName("panel")[panelId].getElementsByClassName("respuesta")[0];
+			const flecha = document.getElementsByClassName("panel")[panelId].getElementsByClassName("flecha")[0];
+
+			if (respuesta.style.display === 'block') {
+				respuesta.style.display = 'none';
+				flecha.classList.toggle('fa-chevron-down');
+			}
+			else {
+				respuesta.style.display = 'block';
+				flecha.classList.toggle('fa-chevron-up');
+			}
+		}
+
+		GetFAQS('ObtenerFAQS')
+			.then(faqs => {
+				faqs.sort(function (a, b) {
+					// Orden ascendente según la propiedad 'orden'
+					return a.orden - b.orden;
+				});
+				var i = 1;
+				faqs.forEach(function (faq) {
+					crearPanel(i, faq.pregunta, faq.respuesta);
+					i++;
+				});
+			})
+			.catch(error => {
+				console.error('Error en GetFAQS:', error);
+				alert('Error en GetFAQS: ', error);
+			});
+	</script>
+
+	<!-- Footer Area -->
+	<footer id="footer" class="footer ">
+		<!-- Footer Top -->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-6 col-12">
+						<div class="single-footer">
+							<h2>About Us</h2>
+							<p>Lorem ipsum dolor sit am consectetur adipisicing elit do eiusmod tempor incididunt ut labore dolore magna.</p>
+							<!-- Social -->
+							<ul class="social">
+								<li><a href="#"><i class="icofont-facebook"></i></a></li>
+								<li><a href="#"><i class="icofont-google-plus"></i></a></li>
+								<li><a href="#"><i class="icofont-twitter"></i></a></li>
+								<li><a href="#"><i class="icofont-vimeo"></i></a></li>
+								<li><a href="#"><i class="icofont-pinterest"></i></a></li>
+							</ul>
+							<!-- End Social -->
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<div class="single-footer f-link">
+							<h2>Quick Links</h2>
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-12">
+									<ul>
+										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Home</a></li>
+										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>About Us</a></li>
+										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Services</a></li>
+										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Our Cases</a></li>
+										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Other Links</a></li>
+									</ul>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12">
+									<ul>
+										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Consuling</a></li>
+										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Finance</a></li>
+										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Testimonials</a></li>
+										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>FAQ</a></li>
+										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Contact Us</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<div class="single-footer">
+							<h2>Open Hours</h2>
+							<p>Lorem ipsum dolor sit ame consectetur adipisicing elit do eiusmod tempor incididunt.</p>
+							<ul class="time-sidual">
+								<li class="day">Monday - Fridayp <span>8.00-20.00</span></li>
+								<li class="day">Saturday <span>9.00-18.30</span></li>
+								<li class="day">Monday - Thusday <span>9.00-15.00</span></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<div class="single-footer">
+							<h2>Newsletter</h2>
+							<p>subscribe to our newsletter to get allour news in your inbox.. Lorem ipsum dolor sit amet, consectetur adipisicing elit,</p>
+							<form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+								<input name="email" placeholder="Email Address" class="common-input" onfocus="this.placeholder = ''"
+									   onblur="this.placeholder = 'Your email address'" required="" type="email">
+								<button class="button"><i class="icofont icofont-paper-plane"></i></button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Footer Top -->
+		<!-- Copyright -->
+		<div class="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-12">
+						<div class="copyright-content">
+							<p>© Copyright 2023  |  All Rights Reserved by <a href="https://www.wpthemesgrid.com" target="_blank">UOC</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Copyright -->
+	</footer>
+	<!--/ End Footer Area -->
+	<!-- jquery Min JS -->
+	<script src="./js/jquery.min.js"></script>
+	<!-- jquery Migrate JS -->
+	<script src="./js/jquery-migrate-3.0.0.js"></script>
+	<!-- jquery Ui JS -->
+	<script src="./js/jquery-ui.min.js"></script>
+	<!-- Easing JS -->
+	<script src="./js/easing.js"></script>
+	<!-- Color JS -->
+	<script src="./js/colors.js"></script>
+	<!-- Popper JS -->
+	<script src="./js/popper.min.js"></script>
+	<!-- Bootstrap Datepicker JS -->
+	<script src="./js/bootstrap-datepicker.js"></script>
+	<!-- Jquery Nav JS -->
+	<script src="./js/jquery.nav.js"></script>
+	<!-- Slicknav JS -->
+	<script src="./js/slicknav.min.js"></script>
+	<!-- ScrollUp JS -->
+	<script src="./js/jquery.scrollUp.min.js"></script>
+	<!-- Niceselect JS -->
+	<script src="./js/niceselect.js"></script>
+	<!-- Tilt Jquery JS -->
+	<script src="./js/tilt.jquery.min.js"></script>
+	<!-- Owl Carousel JS -->
+	<script src="./js/owl-carousel.js"></script>
+	<!-- counterup JS -->
+	<script src="./js/jquery.counterup.min.js"></script>
+	<!-- Steller JS -->
+	<script src="./js/steller.js"></script>
+	<!-- Wow JS -->
+	<script src="./js/wow.min.js"></script>
+	<!-- Magnific Popup JS -->
+	<script src="./js/jquery.magnific-popup.min.js"></script>
+	<!-- Counter Up CDN JS -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="./js/bootstrap.min.js"></script>
+	<!-- Main JS -->
+	<script src="./js/main.js"></script>
+</body>
+</html>

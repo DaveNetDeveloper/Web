@@ -46,25 +46,7 @@ class Usuario {
         //console.log(`Hola, soy ${this.nombre} y tengo ${this.puntos} puntos.`);
     }
 }
-
-class Filtros {
-    constructor() {
-        this.elementos = [];  // Propiedad bidimensional para almacenar elementos con clave/valor
-    }
-    agregarElemento(clave, valor) { // Método para agregar un elemento con clave/valor al array bidimensional
-        this.elementos.push([clave, valor]);
-    }
-    obtenerValor(clave) { // Método para obtener el valor asociado a una clave
-        const elementoEncontrado = this.elementos.find(elemento => elemento[0] === clave);
-        return elementoEncontrado ? elementoEncontrado[1] : undefined;
-    }
-    imprimirElementos() { // Método para imprimir todos los elementos por consola
-        this.elementos.forEach(elemento => {
-            console.log(`Clave: ${elemento[0]}, Valor: ${elemento[1]}`);
-        });
-    }
-}; 
-
+ 
 //
 // Proxis con los web services del controlador 
 //

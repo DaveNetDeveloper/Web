@@ -7,15 +7,6 @@ const port2 = `7161`;
 const apiUrl2 = `${baseUrl2}:${port2}/${controllerName2}/`;
 
 //var userToken = "qAGlDm9o9oS1Ir+xNlWk3XXHkJy/+nJmBy3KUPoms2w="; // TODO: cambiar por valor de la cookie
-
-/*const controllerActions = [
-    'ObtenerTransaccion',
-    'ObtenerTransaccionByName',
-    'ObtenerTransacciones',
-    'CrearTransaccion',
-    'ActualizarTransaccion',
-    'Eliminar'
-];*/
  
 //
 // Clases
@@ -33,25 +24,7 @@ class Transaccion {
     metodo() {
         //console.log(`Transacción ${this.nombre} con ${this.puntos} puntos.`);
     }
-}
-
-/*class Filtros {
-    constructor() {
-        this.elementos = [];  
-    }
-    agregarElemento(clave, valor) { 
-        this.elementos.push([clave, valor]);
-    }
-    obtenerValor(clave) { 
-        const elementoEncontrado = this.elementos.find(elemento => elemento[0] === clave);
-        return elementoEncontrado ? elementoEncontrado[1] : undefined;
-    }
-    imprimirElementos() { 
-        this.elementos.forEach(elemento => {
-            console.log(`Clave: ${elemento[0]}, Valor: ${elemento[1]}`);
-        });
-    }
-};*/ 
+} 
 
 //
 // Proxies con los web services del controlador 
