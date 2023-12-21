@@ -70,8 +70,28 @@
 	</div>
 	<!-- End Preloader -->
 	<!-- Contenedor para el encabezado -->
-	<div id="headerContainer"></div>
-
+	<!--<div id="headerContainer"></div>-->
+	<!-- Header Area -->
+	<header class="header">
+		<!-- Header Inner -->
+		<div class="header-inner">
+			<div class="container">
+				<div class="inner" style="padding: 18px;">
+					<div class="row" style="margin-left: 41%;">
+						<div>
+							<!-- Start Logo -->
+							<div class="logo">
+								<a href="home-publica.html"><img src="img/logo.png" alt="#"></a>
+							</div>
+							<!-- End Logo -->
+						</div>
+					</div>
+				</div>
+			</div> 
+		</div>
+		<!--/ End Header Inner -->
+	</header>
+	<!-- End Header Area -->
 	<!-- Start Section -->
 	<section class="contact-us section">
 		<div class="container">
@@ -106,7 +126,7 @@
 							<div class="row">
 								<div class="col-12">
 									<div class="">
-										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Quieres recibir ofertas y promociones?</label>
+										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">  Quieres recibir ofertas y promociones?</label>
 									</div>
 									<div class="form-group login-btn">
 										<button class="btn" type="submit" name="btnLogin">CONTINUAR</button>
@@ -126,7 +146,7 @@
 			<!-- Start Modal Panel -->
 			<span id="modalPanelContainer"></span>
 
-			<button id="abrirModal">Abrir Modal</button>
+			<!--<button id="abrirModal">Abrir Modal</button>-->
 			<div id="miModal" class="modal">
 				<div class="modal-contenido">
 					<span class="cerrar" id="cerrarModal">&times;</span>
@@ -145,7 +165,7 @@
 	<!-- Scripts -->
 	<script type="text/javascript">
 		// Cargar encabezado y pie de página
-		cargarContenidoHtml('header.html', 'headerContainer');
+		//cargarContenidoHtml('header.html', 'headerContainer');
 		cargarContenidoHtml('footer.html', 'footerContainer');
 
 		//cargarContenidoHtml('modal-panel.html', 'modalPanelContainer');
@@ -173,16 +193,16 @@
 		console.log("Parámetro [qrCode]: " + parametro);
 
 	</script>
-	 
+
 	<script type="text/javascript">
 
-		var linkPassword = document.getElementById('linkChangePassword'); 
-        linkPassword.addEventListener('click', function (event) {
+		var linkPassword = document.getElementById('linkChangePassword');
+		linkPassword.addEventListener('click', function (event) {
 
 			event.preventDefault();
-			url = 'changePassword.html?email=' + encodeURIComponent(getInputValueByName('email')); 
-            window.location.href = url;
-        });
+			url = 'changePassword.html?email=' + encodeURIComponent(getInputValueByName('email'));
+			window.location.href = url;
+		});
 	</script>
 
 
@@ -208,9 +228,9 @@
 
 			const loginParams = new Filtros();
 			let email = getInputValueByName('email');
-            loginParams.agregarElemento('email', email);
+			loginParams.agregarElemento('email', email);
 
-            var password = getInputValueByName('password');
+			var password = getInputValueByName('password');
 			//loginParams.agregarElemento('contraseña', password);
 
 			/*PatchByFilters('Login', loginParams)
@@ -231,24 +251,24 @@
 			calcularHash(password)
 				.then(hash => {
 					loginParams.agregarElemento('contraseña', hash);
-					
+
 					PatchByFilters('Login', loginParams)
-					.then(data => {
+						.then(data => {
 
-						alert("Hola " + data.nombre + " " + data.correo + "!"); // TODO: TO DELETE
+							alert("Hola " + data.nombre + " " + data.correo + "!"); // TODO: TO DELETE
 
-						// Nueva cookie con el token del usuario
-						const token = `Bearer ${data.token}`;
-						const tokenCodificao = btoa(token);
-						const expiracionEnDias = 30;
-						setCookie("token", tokenCodificao, expiracionEnDias);
+							// Nueva cookie con el token del usuario
+							const token = `Bearer ${data.token}`;
+							const tokenCodificao = btoa(token);
+							const expiracionEnDias = 30;
+							setCookie("token", tokenCodificao, expiracionEnDias);
 
-                        redirectToPage('index.html');
-					})
-					.catch(error => {
-						console.error('Error fuera de la función:', error);
-						alert("Error fuera de la función: " + error);
-					});
+							redirectToPage('home-privada.html');
+						})
+						.catch(error => {
+							console.error('Error fuera de la función:', error);
+							alert("Error fuera de la función: " + error);
+						});
 
 				})
 				.catch(error => {

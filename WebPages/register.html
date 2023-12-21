@@ -62,9 +62,32 @@
         </div>
     </div>
     <!-- End Preloader -->
-
     <!-- Contenedor para el encabezado -->
-    <div id="headerContainer"></div>
+    <!--<div id="headerContainer"></div>-->
+    <!-- Header Area -->
+    <header class="header">
+        <!-- Header Inner -->
+        <div class="header-inner">
+            <div class="container">
+                <div class="inner" style="padding: 18px;">
+                    <div class="row" style="margin-left: 41%;">
+                        <div>
+                            <!-- Start Logo -->
+                            <div class="logo">
+                                <a href="home-publica.html"><img src="img/logo.png" alt="#"></a>
+                            </div>
+                            <!-- End Logo -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="banner">
+                <h1 id="h1Login" style="font-size: 20px;"></h1>
+            </div>
+        </div>
+        <!--/ End Header Inner -->
+    </header>
+    <!-- End Header Area -->
 
     <!-- Start Section -->
     <section class="contact-us section">
@@ -79,7 +102,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input type="email" name="email" placeholder="Email" required value="dgomezmart@uoc.edu">
+                                        <input type="email" name="email" placeholder="Email" required value="">
                                     </div>
                                 </div>
                             </div>
@@ -114,10 +137,10 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="">
-                                        <label class="checkbox-inline" for="1"><input checked="checked" name="tc" id="1" type="checkbox">He leído y acepto los Términos y Condiciones.</label>
+                                        <label class="checkbox-inline" for="1"><input checked="checked" name="tc" id="1" type="checkbox">  He leído y acepto los Términos y Condiciones.</label>
                                     </div>
                                     <div class="">
-                                        <label class="checkbox-inline" for="2"><input name="suscribe" id="2" type="checkbox">Suscríbete para recibir nuestra newletter con noticias y promociones.</label>
+                                        <label class="checkbox-inline" for="2"><input name="suscribe" id="2" type="checkbox">  Suscríbete para recibir nuestra newletter con noticias y promociones.</label>
                                     </div>
                                     <div class="form-group login-btn">
                                         <button class="btn" type="submit" name="btnRegistro">REGÍSTRATE</button>
@@ -132,13 +155,12 @@
         </div>
     </section>
     <!--/ End Section -->
-
     <!-- Contenedor para el footer -->
     <div id="footerContainer"></div>
 
     <!-- Scripts -->
     <script type="text/javascript">
-        cargarContenidoHtml('header.html', 'headerContainer');
+        // cargarContenidoHtml('header.html', 'headerContainer');
         cargarContenidoHtml('footer.html', 'footerContainer');
     </script>
 
@@ -163,7 +185,7 @@
             if (!validateSurname(newUser.apellidos)) return false;
             if (!validateEmail(newUser.email)) return false;
             if (!validatePassword(newUser.contraseña)) return false;
-            if (!validateDate(newUser.fechaNacimiento)) return false; 
+            if (!validateDate(newUser.fechaNacimiento)) return false;
 
             return true;
         }
@@ -198,7 +220,7 @@
         }
 
         function getFormUser() {
-            // 
+            //
             var formUser = new Usuario(
                 null,
                 getInputValueByName('name'),
@@ -212,8 +234,8 @@
                 null);
             return formUser;
         }
-        
-        function crearTransaccion(idUser) { 
+
+        function crearTransaccion(idUser) {
 
             return new Transaccion(
                 null,
@@ -222,7 +244,7 @@
                 null,
                 300,
                 null);
-        } 
+        }
 
     </script>
 
@@ -239,7 +261,7 @@
                     newUser.contraseña = hash;
                     Post('CrearUsuario', newUser)
                         .then(data => {
-                                
+
                             var transaccion = crearTransaccion(data.id);
                             PostTransaccion("CrearTransaccion", transaccion)
                                 .then(t => {
@@ -248,7 +270,7 @@
                                 })
                                 .catch(error => {
                                     console.error('Error fuera de la función PostTransaccion:', error);
-                                });   
+                                });
                         })
                         .catch(error => {
                             console.error('Error fuera de la función CrearUsuario:', error);
@@ -256,7 +278,7 @@
                 });
             }
             else {
-                // 
+                //
                 alert('Hay errores de validación');
             }
         }

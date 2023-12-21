@@ -44,8 +44,8 @@
 	<!-- Modal Panel CSS -->
 	<link rel="stylesheet" href="./css/modalPanel.css">
 
-	<script src="./js/services/entidadesController.js"></script>
 	<script src="./js/libraries/utilities.js"></script>
+	<script src="./js/services/entidadesController.js"></script>
 	<script src="./js/libraries/modalPanel.js"></script>
 
 	<style>
@@ -70,7 +70,6 @@
 			}
 	</style>
 
-
 </head>
 <body>
 
@@ -89,7 +88,6 @@
 		</div>
 	</div>
 	<!-- End Preloader -->
-
 	<!-- Header Area -->
 	<header class="header">
 		<!-- Header Inner -->
@@ -150,7 +148,6 @@
 		<!--/ End Header Inner -->
 	</header>
 	<!-- End Header Area -->
-
 	<!-- Start Newsletter Area -->
 	<section class="newsletter section">
 		<div class="container">
@@ -179,8 +176,6 @@
 		</div>
 	</section>
 	<!-- /End Newsletter Area -->
-
-
 	<!-- Start Modal Panel -->
 	<span id="modalPanelContainer"></span>
 
@@ -195,42 +190,94 @@
 	</div>
 	<!--End Modal Panel-->
 
+
+	<div id="filterContainer" class="filter-pills">
+		<!-- Pastillas de filtro se agregan dinámicamente -->
+	</div>
+
+	<!-- Start Blog Area -->
+	<section class="blog section" id="blog">
+		<div class="container">
+
+			<!--<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title">
+						<h2>Keep up with Our Most Recent Medical News.</h2>
+						<img src="img/section-img.png" alt="#">
+						<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+					</div>
+				</div>
+			</div>-->
+
+			<div id="cardsPanel" class="row">
+
+			</div>
+		</div>
+	</section>
+	<!-- End Blog Area -->
+
+
 	<script type="text/javascript">
 
-		cargarContenidoModal('Filtros de la búsqueda', 'Contenido del modal...'); 
+		busquedaInicial();
+		cargarContenidoModal('Filtros de la búsqueda', 'Contenido del modal...');
 
-        const FiltrosBusqueda = {};
+		const FiltrosBusqueda = {};
+     
+		crearInputTexto('Nombre');
 
-        // Crea un input de texto
+		crearDropdown('Tipo', ['Tipo 1', 'Tipo 2', 'Tipo 3']);
+
+		crearDropdown('Categoria', ['Categoría 1', 'Categoría 2', 'Categoría 3']);
+
+		crearSlider('Distancia', 200, 1500);
+
+		crearBoton();
+
+        function busquedaInicial() {
+
+            var url = new URL(window.location.href);
+            var urlParams = new URLSearchParams(url.search);
+            var paramNombreEntidad = urlParams.get('textSearch');
+
+            document.getElementById('textEntidad').value = paramNombreEntidad;
+
+            if (paramNombreEntidad.trim() === '' || !/^[a-zA-Z\u00C0-\u017F]+$/.test(paramNombreEntidad)) {
+                alert('Valor no válido para la búsqueda.');
+            }
+            else {
+                buscarEntidad(paramNombreEntidad);
+            }
+        }
+
         function crearInputTexto(titulo) {
             const input = document.createElement('input');
             input.type = 'text';
             input.name = titulo.toLowerCase();
             input.placeholder = '';
 
-			input.addEventListener('input', function () {
+            input.addEventListener('input', function () {
 
                 //alert(input.name + " " + input.value);
-				actualizarFiltros(input.name, input.value);
+                actualizarFiltros(input.name, input.value);
             });
 
             const row = crearFila(titulo, input);
             document.getElementById('containerModal').appendChild(row);
         }
 
-        // Crea un dropdown list
         function crearDropdown(titulo, opciones) {
             const select = document.createElement('select');
             select.name = titulo.toLowerCase();
             select.style.float = "right";
 
-			let i = 1;
+            let i = 1;
             opciones.forEach(opcion => {
                 const option = document.createElement('option');
                 option.text = opcion;
                 option.value = i;
-				select.add(option);
-				i++;
+                select.add(option);
+                i++;
             });
 
             select.addEventListener('change', function () {
@@ -241,7 +288,6 @@
             document.getElementById('containerModal').appendChild(row);
         }
 
-        // Crea un slider
         function crearSlider(titulo, min, max) {
             const slider = document.createElement('input');
             slider.type = 'range';
@@ -257,7 +303,6 @@
             document.getElementById('containerModal').appendChild(row);
         }
 
-        // Crea una fila con título e input
         function crearFila(titulo, input) {
             const row = document.createElement('div');
             row.classList.add('input-row');
@@ -273,17 +318,16 @@
             return row;
         }
 
-        // Crea el botón APLICAR
         function crearBoton() {
-			const boton = document.createElement('button');
+            const boton = document.createElement('button');
             boton.classList.add('btn');
 
             boton.textContent = 'APLICAR';
-			boton.style.marginTop = '20px';
+            boton.style.marginTop = '20px';
 
-			boton.addEventListener('click', function () {
+            boton.addEventListener('click', function () {
 
-                //alert(FiltrosBusqueda.nombre + " - " + FiltrosBusqueda.distancia + " - " + document.getElementsByName("tipo")[0].value + " - " + document.getElementsByName("categoria")[0].value); 
+                //alert(FiltrosBusqueda.nombre + " - " + FiltrosBusqueda.distancia + " - " + document.getElementsByName("tipo")[0].value + " - " + document.getElementsByName("categoria")[0].value);
                 buscarEntidadByFilters(FiltrosBusqueda.nombre, FiltrosBusqueda.distancia, document.getElementsByName("tipo")[0].value, document.getElementsByName("categoria")[0].value);
             });
             document.getElementById('containerModal').appendChild(boton);
@@ -292,39 +336,28 @@
         // Función para actualizar los filtros si el valor no está vacío
         function actualizarFiltros(nombreCampo, valor) {
             if (valor.trim() !== '') {
-                
-				FiltrosBusqueda[nombreCampo] = valor.trim();
-			} else {
-				
+
+                FiltrosBusqueda[nombreCampo] = valor.trim();
+            } else {
+
                 delete FiltrosBusqueda[nombreCampo];
             }
         }
 
-        // Ejemplos de uso
-        crearInputTexto('Nombre');
-
-		crearDropdown('Tipo', ['Tipo 1', 'Tipo 2', 'Tipo 3']);
-
-        crearDropdown('Categoria', ['Categoría 1', 'Categoría 2', 'Categoría 3']);
-
-		crearSlider('Distancia', 200, 1500);
-
-		crearBoton();
 
 		function filtros() {
 
 			document.getElementsByName("nombre")[0].value = "";
 			document.getElementsByName("distancia")[0].value = 0;
 
-            document.getElementsByName("categoria")[0].selectedIndex = 0;
-            document.getElementsByName("tipo")[0].selectedIndex = 0;
+			document.getElementsByName("categoria")[0].selectedIndex = 0;
+			document.getElementsByName("tipo")[0].selectedIndex = 0;
 		}
 
-        function buscarPorNombre() {
-			// Obtener el valor del input
+		function buscarPorNombre() {
 			const textEntidadValue = document.getElementById('textEntidad').value;
 
-            if (textEntidadValue.trim() === '' || !/^[a-zA-Z\u00C0-\u017F]+$/.test(textEntidadValue)) {
+			if (textEntidadValue.trim() === '' || !/^[a-zA-Z\u00C0-\u017F]+$/.test(textEntidadValue)) {
 				alert('Por favor, ingrese un valor válido para la entidad.');
 			}
 			else {
@@ -334,23 +367,23 @@
 
 		function buscarEntidadByFilters(nombre, proximidad, tipo, categoria) {
 
-            const searchParams = new Filtros();
+			const searchParams = new Filtros();
 			searchParams.agregarElemento('nombre', nombre);
-            searchParams.agregarElemento('tipo', tipo);
-            searchParams.agregarElemento('categoria', categoria);
-            searchParams.agregarElemento('proximidad', proximidad);
+			searchParams.agregarElemento('tipo', tipo);
+			searchParams.agregarElemento('categoria', categoria);
+			searchParams.agregarElemento('proximidad', proximidad);
 
-            let contenedor = document.getElementById('cardsPanel');
-            contenedor.innerHTML = '';
+			let contenedor = document.getElementById('cardsPanel');
+			contenedor.innerHTML = '';
 
-            GetEntidadByFilters('ObtenerEntidadesByFilters', searchParams)
+			GetEntidadByFilters('ObtenerEntidadesByFilters', searchParams)
 				.then(entidades => {
 
-                    alert("ok GetEntidadByFilters");
+					alert("ok GetEntidadByFilters");
 
-                    resetFiltroBusqueda();
-					 
-                    if (entidades !== undefined && entidades.length > 0) {
+					resetFiltroBusqueda();
+
+					if (entidades !== undefined && entidades.length > 0) {
 
 						var i = 1;
 						entidades.forEach(function (entidad) {
@@ -362,57 +395,57 @@
 							contenedor.appendChild(card);
 							i++;
 						})
-                    }
+					}
 
-                    alert("pre aplicarFiltros");
+					alert("pre aplicarFiltros");
 					aplicarFiltros(searchParams);
-                    alert("post  aplicarFiltros");
-                    miModal.style.display = 'none';
-                })
-                .catch(error => {
-                    console.error('Error en GetEntidades:', error);
-                    alert('Error en GetEntidades: ', error);
+					alert("post  aplicarFiltros");
+					miModal.style.display = 'none';
+				})
+				.catch(error => {
+					console.error('Error en GetEntidades:', error);
+					alert('Error en GetEntidades: ', error);
 				});
 		}
 
-        function aplicarFiltros(searchParams) {
+		function aplicarFiltros(searchParams) {
 
-            alert("aplicarFiltros");
+			alert("aplicarFiltros");
 
 			resetEtiquetas();
-            
-            searchParams.elementos.forEach(filtro => {
 
-                switch (filtro[0]) {
-                    case "nombre":
+			searchParams.elementos.forEach(filtro => {
 
-                        //alert("nombre - " + filtro[1]);        
-                        if (filtro[1].length > 0) {
+				switch (filtro[0]) {
+					case "nombre":
+
+						//alert("nombre - " + filtro[1]);
+						if (filtro[1].length > 0) {
 							agregarFiltro(filtro[0]);
 						}
-                        break;
-                    case "tipo":
+						break;
+					case "tipo":
 
-                        //alert("tipo - " + filtro[1]);        
-                        if (filtro[1] > 0) {
-                            agregarFiltro(filtro[0]);
-                        }
-                        break;
-                    case "categoria":
-
-                        //alert("categoria - " + filtro[1]);        
-                        if (filtro[1] > 0) {
-                            agregarFiltro(filtro[0]);
-                        }
-                        break;
-                    case "proximidad":
-
-                        //alert("proximidad - " + filtro[1]);        
-                        if (filtro[1] > 0) {
-                            agregarFiltro(filtro[0]);
+						//alert("tipo - " + filtro[1]);
+						if (filtro[1] > 0) {
+							agregarFiltro(filtro[0]);
 						}
-                        break;
-                }
+						break;
+					case "categoria":
+
+						//alert("categoria - " + filtro[1]);
+						if (filtro[1] > 0) {
+							agregarFiltro(filtro[0]);
+						}
+						break;
+					case "proximidad":
+
+						//alert("proximidad - " + filtro[1]);
+						if (filtro[1] > 0) {
+							agregarFiltro(filtro[0]);
+						}
+						break;
+				}
 			});
 		}
 
@@ -430,9 +463,7 @@
 					var i = 1;
 					entidades.forEach(function (entidad) {
 
-						//Construir card de la entidad
 						let card = crearCard(entidad.id, entidad.nombre, entidad.tipo, entidad.categoria, entidad.descripcion, entidad.imagen, entidad.ubicacion);
-						// la añadimos al contenedor
 						contenedor.appendChild(card);
 						i++;
 					})
@@ -449,10 +480,10 @@
 			const divCol = document.createElement('div');
 			divCol.id = id;
 
-            divCol.addEventListener("click", function () {
-                
-                redirectToPage('landing-entidad.html?id=' + id);
-            });
+			divCol.addEventListener("click", function () {
+
+				redirectToPage('landing-entidad.html?id=' + id);
+			});
 
 			divCol.className = 'col-lg-4 col-md-6 col-12';
 
@@ -484,9 +515,9 @@
 
 			const p = document.createElement('p');
 			p.className = 'text';
-			p.textContent = descripcion;
+            p.textContent = descripcion.slice(0, 300);; 
 
-			// Construir la estructura del elemento
+			//
 			divNewsContent.appendChild(divDate);
 			divNewsContent.appendChild(h2);
 			divNewsContent.appendChild(p);
@@ -503,35 +534,28 @@
 			return divCol;
 		}
 
-        function resetEtiquetas() {
+		function resetEtiquetas() {
 
-            var elementos = document.getElementsByClassName("filter-pill");
-            var elementosArray = Array.from(elementos);
-            elementosArray.forEach(function (elemento) {
-                elemento.remove();
-            }); 
+			var elementos = document.getElementsByClassName("filter-pill");
+			var elementosArray = Array.from(elementos);
+			elementosArray.forEach(function (elemento) {
+				elemento.remove();
+			});
 		}
 
-		function resetFiltroBusqueda() { 
+		function resetFiltroBusqueda() {
 
-            FiltrosBusqueda.nombre = "";
+			FiltrosBusqueda.nombre = "";
 			FiltrosBusqueda.proximidad = 200;
 		}
 
-	</script>
-
-	<div id="filterContainer" class="filter-pills">
-		<!-- Pastillas de filtro se agregan dinámicamente -->
-	</div>
-
-	<script>
 		function agregarFiltro(tipoFiltro) {
 			// Crear la pastilla de filtro
 			const filterPill = document.createElement('div');
-			filterPill.classList.add('filter-pill'); 
+			filterPill.classList.add('filter-pill');
 
 			// Contenido de la pastilla
-            filterPill.innerHTML = tipoFiltro + '<button id="' + tipoFiltro + '" onclick="eliminarFiltro(this, \'' + tipoFiltro + '\')">❌</button>';
+			filterPill.innerHTML = tipoFiltro + '<button id="' + tipoFiltro + '" onclick="eliminarFiltro(this, \'' + tipoFiltro + '\')">❌</button>';
 
 
 			// Agregar la pastilla al contenedor
@@ -545,48 +569,28 @@
 
 			alert(tipoFiltro);
 
-            switch (tipoFiltro) {
-                case "nombre":
-                    FiltrosBusqueda.nombre = "";
-                    break;
-                case "tipo":
+			switch (tipoFiltro) {
+				case "nombre":
+					FiltrosBusqueda.nombre = "";
+					break;
+				case "tipo":
 
-                    break;
-                case "categoria":
+					break;
+				case "categoria":
 
-                    break;
-                case "proximidad":
-                    FiltrosBusqueda.distancia = 200;
-                    break;
-            }  
+					break;
+				case "proximidad":
+					FiltrosBusqueda.distancia = 200;
+					break;
+			}
 			filterPill.remove();
 
 			buscarEntidadByFilters(FiltrosBusqueda.nombre, FiltrosBusqueda.distancia, document.getElementsByName("tipo")[0].value, document.getElementsByName("categoria")[0].value);
-			  
+
 		}
+
 	</script>
 
-
-	<!-- Start Blog Area -->
-	<section class="blog section" id="blog">
-		<div class="container">
-
-			<!--<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title">
-						<h2>Keep up with Our Most Recent Medical News.</h2>
-						<img src="img/section-img.png" alt="#">
-						<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
-					</div>
-				</div>
-			</div>-->
-
-			<div id="cardsPanel" class="row">
-				 
-			</div>
-		</div>
-	</section>
-	<!-- End Blog Area -->
 
 	<!-- Slider Area -->
 	<section class="slider">
@@ -648,7 +652,6 @@
 		</div>
 	</section>
 	<!--/ End Slider Area -->
-
 	<!-- Start Schedule Area -->
 	<section class="schedule">
 		<div class="container">
