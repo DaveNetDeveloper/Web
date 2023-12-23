@@ -9,7 +9,7 @@
 	<meta name='copyright' content='UOC'>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title>Login</title>
+	<title>QR Login</title>
 
 	<link rel="icon" href="img/favicon.png">
 
@@ -100,8 +100,6 @@
 									<img name="imgProductImage" src="" alt="Imagen del producto escaneado">
 								</div>
 							</div>
-
-							<!-- Form -->
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
@@ -225,15 +223,12 @@
 	</script>
 
 	<script type="text/javascript">
-
 		var linkPassword = document.getElementById('linkChangePassword');
-
 		linkPassword.addEventListener('click', function (event) {
 			event.preventDefault();
 			url = 'changePassword.html?email=' + encodeURIComponent(getInputValueByName('emailQR'));
 			window.location.href = url;
 		});
-
 	</script>
 
 	<script type="text/javascript">
@@ -243,7 +238,6 @@
 
 		//setInputValueByName('email', 'david@correo.com');
 		//setInputValueByName('password', 'nuevaPassword!');
-
 	</script>
 
 	<script type="text/javascript">
@@ -290,7 +284,6 @@
 				});*/
 
 		}
-
 		const btnContinuar = document.querySelector('button[name="btnContinuar"]');
 		btnContinuar.addEventListener('click', onClickBtnContinuar);
 
