@@ -1999,14 +1999,15 @@ body{
 .blog .blog-title{
 	text-align:center;
 }
-.blog .single-news {
-	background: #fff;
-	position: relative;
-	-webkit-transition: all 0.4s ease;
-	-moz-transition: all 0.4s ease;
-	transition: all 0.4s ease;
-	box-shadow: 0px 0px 10px #00000014;
-}
+	.blog .single-news {
+		background: #fff;
+		position: relative;
+		-webkit-transition: all 0.4s ease;
+		-moz-transition: all 0.4s ease;
+		transition: all 0.4s ease;
+		box-shadow: 0px 0px 10px #00000014;
+		cursor: pointer;
+	}
 .blog .single-news img{
 	width:100%;
 	margin:0;
@@ -2047,12 +2048,13 @@ body{
 	visibility:visible;
 	width:100%;
 }
-.blog .single-news .news-body h2 {
-	font-size: 18px;
-	font-weight: 600;
-	margin-bottom: 10px;
-	line-height: 24px;
-}
+		.blog .single-news .news-body h2 {
+			font-size: 18px;
+			font-weight: 600;
+			margin-bottom: 10px;
+			line-height: 24px;
+			margin-top: 20px;
+		}
 .blog .single-news .news-body h2 a{
 	color:#2C2D3F;
 	font-weight: 500;
@@ -3541,15 +3543,15 @@ body{
 
 /*=========================
 	Start Newsletter CSS
-===========================*/  
-.newsletter{
-	background:#EDF2FF;
+===========================*/
+.newsletter {
+	background: #1a76d1;
 }
 .newsletter .subscribe-text{}
 .newsletter .subscribe-text h6{
 	font-size:22px;
 	margin-bottom:10px;
-	color:#2C2D3F;
+	color:white;
 }
 .newsletter .subscribe-text p{}
 .newsletter .subscribe-form{
@@ -3557,7 +3559,7 @@ body{
 }
 	.newsletter .common-input {
 		height: 60px;
-		width: 345px;
+		width: 340px;
 		border: none;
 		color: #333;
 		box-shadow: none;

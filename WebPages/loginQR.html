@@ -9,10 +9,8 @@
 	<meta name='copyright' content='UOC'>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Title -->
 	<title>Login</title>
 
-	<!-- Favicon -->
 	<link rel="icon" href="img/favicon.png">
 
 	<!-- Google Fonts -->
@@ -34,8 +32,7 @@
 	<link rel="stylesheet" href="./css/datepicker.css">
 	<!-- Animate CSS -->
 	<link rel="stylesheet" href="./css/animate.min.css">
-	<!-- Magnific Popup CSS -->
-	<!--<link rel="stylesheet" href="./css/magnific-popup.css">-->
+	
 	<!-- Site CSS -->
 	<link rel="stylesheet" href="./css/normalize.css">
 	<link rel="stylesheet" href="./css/style.css">
@@ -45,12 +42,11 @@
 	<link rel="stylesheet" href="./css/modalPanel.css">
 
 	<!-- Js Sripts -->
+	<script src="./js/libraries/utilities.js"></script>
 	<script src="./js/libraries/modalPanel.js"></script>
 	<script src="./js/services/usuariosController.js"></script>
 	<script src="./js/services/qrsController.js"></script>
 	<script src="./js/services/productosController.js"></script>
-
-	<script src="./js/libraries/utilities.js"></script>
 
 </head>
 <body>
@@ -70,10 +66,25 @@
 		</div>
 	</div>
 	<!-- End Preloader -->
-
-	<!-- Contenedor para el encabezado -->
-	<div id="headerContainer"></div>
-
+	<!-- Header Area -->
+	<header class="header">
+		<!-- Header Inner -->
+		<div class="header-inner">
+			<div class="container">
+				<div class="inner" style="padding: 18px;">
+					<div class="row" style="margin-left: 48%;">
+						<div>
+							<div class="logo">
+								<a href="home-publica.html"><img src="img/logo.jpg" alt="#"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Header Inner -->
+	</header>
+	<!-- End Header Area -->
 	<!-- Start Section -->
 	<section class="contact-us section">
 		<div class="container">
@@ -82,9 +93,9 @@
 					<div class="col-lg-12">
 						<div class="contact-us-form">
 							<h4 id="h4Subtitle">Has escaneado [productName].</h4>
-							<p id="pSubtitle">Estás a punto de conseguir [productPoints] puntos.</p>
+							<p style="margin-top: 25px;" id="pSubtitle">Estás a punto de conseguir [productPoints] puntos.</p>
 
-							<div class="row">
+							<div class="row" style="margin-bottom:50px">
 								<div class="col-lg-6">
 									<img name="imgProductImage" src="" alt="Imagen del producto escaneado">
 								</div>
@@ -94,14 +105,14 @@
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
-										<input type="email" name="email" placeholder="Email" required>
+										<input style="width: 300px;" type="email" name="emailQR" placeholder="Email" required>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
-										<input type="password" name="password" placeholder="Contraseña" required>
+										<input style="width: 300px;" type="password" name="passwordQR" placeholder="Contraseña" required>
 									</div>
 								</div>
 							</div>
@@ -115,10 +126,10 @@
 							<div class="row">
 								<div class="col-12">
 									<div class="">
-										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Quieres recibir ofertas y promociones?</label>
+										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">  Quieres recibir ofertas y promociones?</label>
 									</div>
-									<div class="form-group login-btn">
-										<button class="btn" type="submit" name="btnContinuar">CONTINUAR</button>
+									<div style=" margin-top: 25px;" class="form-group login-btn">
+										<button id="qrLoginButton" style="width:300px" class="btn" type="submit" name="btnContinuar">CONTINUAR</button>
 									</div>
 								</div>
 							</div>
@@ -126,37 +137,17 @@
 					</div>
 				</div>
 			</div>
-			<br /><br />
-			<!-- Start Modal Panel -->
-			<span id="modalPanelContainer"></span>
-
-			<button id="abrirModal">Abrir Modal</button>
-			<div id="miModal" class="modal">
-				<div class="modal-contenido">
-					<span class="cerrar" id="cerrarModal">&times;</span>
-					<h3 id="h3Modal" style="text-align: center; margin-top: 3%"></h3>
-					<p id="pModal" style="margin-top: 5%"></p>
-				</div>
-			</div>
-			<!--End Modal Panel-->
 		</div>
 	</section>
 	<!--/ End Contact Us -->
-
 	<!-- Contenedor para el footer -->
 	<div id="footerContainer"></div>
 
 	<!-- Scripts -->
 	<script type="text/javascript">
 		// Cargar encabezado y pie de página
-		cargarContenidoHtml('header.html', 'headerContainer');
+		//cargarContenidoHtml('header.html', 'headerContainer');
 		cargarContenidoHtml('footer.html', 'footerContainer');
-
-		//cargarContenidoHtml('modal-panel.html', 'modalPanelContainer');
-	</script>
-
-	<script type="text/javascript">
-		cargarContenidoModal('Título', 'Contenido del modal...');
 	</script>
 
 	<script type="text/javascript">
@@ -165,82 +156,90 @@
 		var params = new URLSearchParams(url.search);// Crear un objeto URLSearchParams
 		var parametro = params.get('qrCode');// Obtener el valor de un parámetro específico por su nombre
 
-		// TODO:
 		// la landing QR nos envia el parametro qrCode
 		// si existe y está activo y no está expirado
 		// obtenemos los datos del producto relacionado
 		// después del login del usuario o de chequear que la cuenta está iniciada
 		// creamos la transaccion de puntos del usuario
 
-		alert("Parámetro [qrCode]: " + parametro);
+		//alert("Parámetro [qrCode]: " + parametro);
 
 		let parameters = new Filtros();
-        parameters.agregarElemento('qrCode', parametro);
+		parameters.agregarElemento('qrCode', parametro);
 
 		GetQRByFilters('ObtenerQRByCode', parameters)
 			.then(data => {
 
-				//
-				if (!data.activo) alert("El QR no está activado.");
-				if (data.consumido) alert("El QR ya se ha consumido.");
+				//Validaciones sobre las propiedades del QR
+				if (!data.activo) {
+					alert("El QR no está activado.");
+					deshabilitarBoton();
+				}
+				if (data.consumido) {
+					alert("El QR ya se ha consumido.");
+					deshabilitarBoton();
+				}
 
-				if (data.fechaExpiracion !== null) alert("El QR tiene fecha de expiración: " + data.fechaExpiracion.toString());
-				let fechaExpirada = isExpiredDate(data.fechaExpiracion.toString());
-				alert("Fecha expirada? " + fechaExpirada)
+				if (data.fechaExpiracion !== null) {
+					//alert("El QR tiene fecha de expiración: " + data.fechaExpiracion.toString())
+					let fechaExpirada = isExpiredDate(data.fechaExpiracion.toString());
+					if (fechaExpirada) {
+						alert("El QR está expirado");
+						deshabilitarBoton();
+					}
+				}
 
-				// llamar a productosController para obtener información del producto del QR
+				// llamada a productosController para obtener información del producto del QR
 				// para mostrar el nombre en [productName] y los puntos en [productPoints]
-				// mostrar imagen de producto según url de [data.imagen] -> "img/productos/imagen.jpg"
+				// mostrar imagen de producto según url de [data.imagen] -> "img/productos/..."
 
-                GetProducto(data.idProducto)
+				GetProducto(data.idProducto)
 					.then(product => {
 
-                        replaceTextByTagId('h4Subtitle', '[productName]', product.nombre);
+						replaceTextByTagId('h4Subtitle', '[productName]', product.nombre);
 						replaceTextByTagId('pSubtitle', '[productPoints]', product.puntos);
 
-                        const imagen = document.getElementsByName('imgProductImage')[0];
-                        if (imagen !== null) {
-                            imagen.src = product.imagen;
-                            //alert("imagen: " + imagen.src);
-                        }
-                    })
-					.catch (error => {
-                        console.error('Error en GetProducto:', error);
+						const imagen = document.getElementsByName('imgProductImage')[0];
+						if (imagen !== null) {
+							imagen.src = product.imagen;
+							imagen.style.maxWidth = "50%";
+							//alert("imagen: " + imagen.src);
+						}
+					})
+					.catch(error => {
+						console.error('Error en GetProducto:', error);
 						//alert('Error en PatchByFilters: ', error);
-                });
+					});
+			})
+			.catch(error => {
+				console.error('Error en GetQRByFilters:', error);
+				//alert('Error en PatchByFilters: ', error);
+			});
 
-				 
-				//
-				//Others
-				//
-                //enviarCorreo(data.correo, 1); // Bienvenida
-
-				//redirectToPage('index.html');
-
-            })
-            .catch(error => {
-                console.error('Error en GetQRByFilters:', error);
-                //alert('Error en PatchByFilters: ', error);
-            }); 
+		function deshabilitarBoton() {
+            var qrLoginButton = document.getElementById("qrLoginButton");
+			qrLoginButton.disabled = true;
+            qrLoginButton.style.cursor = "not-allowed";
+		}
 
 	</script>
-	 
+
 	<script type="text/javascript">
 
-		var linkPassword = document.getElementById('linkChangePassword'); 
+		var linkPassword = document.getElementById('linkChangePassword');
 
-        linkPassword.addEventListener('click', function (event) {
+		linkPassword.addEventListener('click', function (event) {
 			event.preventDefault();
-			url = 'changePassword.html?email=' + encodeURIComponent(getInputValueByName('email')); 
-            window.location.href = url;
+			url = 'changePassword.html?email=' + encodeURIComponent(getInputValueByName('emailQR'));
+			window.location.href = url;
 		});
 
 	</script>
 
 	<script type="text/javascript">
 
-		var emailValue = getInputValueByName('email');
-		var passwordValue = getInputValueByName('password');
+        var emailValue = getInputValueByName('emailQR');
+        var passwordValue = getInputValueByName('passwordQR');
 
 		//setInputValueByName('email', 'david@correo.com');
 		//setInputValueByName('password', 'nuevaPassword!');
@@ -258,28 +257,10 @@
 			//window.location.href = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
 
 			//const loginParams = new Filtros();
-            loginParams.agregarElemento('email', getInputValueByName('email'));
+            loginParams.agregarElemento('email', getInputValueByName('emailQR'));
 
 			//var password = 'a43eb9231a63e870a6c359495762cc2fb2b788d4b0d6948436e0d113fa3fdcd2';
-            loginParams.agregarElemento('contraseña', getInputValueByName('password'));
-
-
-
-
-
-			 
-
-
-
-
-
-
-
-
-
-
-
-
+            loginParams.agregarElemento('contraseña', getInputValueByName('passwordQR'));
 
 			/*PatchByFilters('Login', loginParams)
 				.then(data => {
@@ -310,8 +291,8 @@
 
 		}
 
-        const btnContinuar = document.querySelector('button[name="btnContinuar"]');
-        btnContinuar.addEventListener('click', onClickBtnContinuar);
+		const btnContinuar = document.querySelector('button[name="btnContinuar"]');
+		btnContinuar.addEventListener('click', onClickBtnContinuar);
 
 	</script>
 

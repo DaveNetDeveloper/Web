@@ -181,7 +181,7 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 }
 p {
-	color:#757575;
+	color:white;
 	margin: 0;
 	line-height:24px;
 	font-weight:400;
@@ -511,7 +511,7 @@ Preloader Area CSS
 	background-position: center;
 	background-repeat: no-repeat;
 	position: relative;
-	padding: 120px 0px;
+	padding: 50px 0px;
 }
 .breadcrumbs .bread-inner{
 	z-index:22;

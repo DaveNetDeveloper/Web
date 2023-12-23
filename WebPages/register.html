@@ -9,10 +9,8 @@
     <meta name='copyright' content='UOC'>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Title -->
     <title>Registro</title>
 
-    <!-- Favicon -->
     <link rel="icon" href="img/favicon.png">
 
     <!-- Google Fonts -->
@@ -70,11 +68,11 @@
         <div class="header-inner">
             <div class="container">
                 <div class="inner" style="padding: 18px;">
-                    <div class="row" style="margin-left: 41%;">
+                    <div class="row" style="margin-left: 48%;">
                         <div>
                             <!-- Start Logo -->
                             <div class="logo">
-                                <a href="home-publica.html"><img src="img/logo.png" alt="#"></a>
+                                <a href="home-publica.html"><img src="img/logo.jpg" alt="#"></a>
                             </div>
                             <!-- End Logo -->
                         </div>
@@ -96,7 +94,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="contact-us-form">
-                            <h2>Únete...</h2>
+                            <h2>Únete</h2>
                             <p>Crear tu cuenta y consigue 300 puntos de bienvenida.</p>
                             <!-- Form -->
                             <div class="row">
@@ -116,33 +114,33 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input type="text" name="name" placeholder="Nombre" required value="nombre">
+                                        <input type="text" name="name" placeholder="Nombre" required value="">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input type="text" name="surname" placeholder="Apellidos" required value="apellidos">
+                                        <input type="text" name="surname" placeholder="Apellidos" required value="">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input type="date" name="date" placeholder="Fecha de nacimiento" required value="02-11-2023">
+                                        <input style="width: 180px;" type="date" name="date" placeholder="Fecha de nacimiento" required value="02-11-2023">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="">
-                                        <label class="checkbox-inline" for="1"><input checked="checked" name="tc" id="1" type="checkbox">  He leído y acepto los Términos y Condiciones.</label>
+                                        <label class="checkbox-inline" for="1"><input style="margin-top: 15px;" checked="checked" name="tc" id="1" type="checkbox">  He leído y acepto los Términos y Condiciones.</label>
                                     </div>
                                     <div class="">
                                         <label class="checkbox-inline" for="2"><input name="suscribe" id="2" type="checkbox">  Suscríbete para recibir nuestra newletter con noticias y promociones.</label>
                                     </div>
-                                    <div class="form-group login-btn">
+                                    <div class="form-group login-btn" style="margin-top: 20px;">
                                         <button class="btn" type="submit" name="btnRegistro">REGÍSTRATE</button>
                                     </div>
                                 </div>
@@ -177,7 +175,6 @@
     <script type="text/javascript">
 
         /*Validaciones de los campos del formulario*/
-
         function validateNewUser(newUser) {
 
             if (!validateTermsAndConsitions()) return false;

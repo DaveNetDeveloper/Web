@@ -6,7 +6,7 @@ const controllerName = `Usuarios`;
 const port = `7161`;
 const apiUrl = `${baseUrl}:${port}/${controllerName}/`;
 
-var userToken = "qAGlDm9o9oS1Ir+xNlWk3XXHkJy/+nJmBy3KUPoms2w="; // TODO: cambiar por valor de la cookie
+var userToken = "qAGlDm9o9oS1Ir+xNlWk3XXHkJy/+nJmBy3KUPoms2w=";
 
 
 const controllerActions = [
