@@ -1,4 +1,14 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
+//
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+});
+
 var app = builder.Build();
 
 //app.MapGet("/", () => ("/index.html"));
@@ -17,7 +27,7 @@ app.UseRouting();
 //    builder.WithOrigins("https://localhost:7161") // Reemplaza con el dominio de tu front-end
 //           .AllowAnyHeader()
 //           .AllowAnyMethod();
-//});
+//}); 
 
 //app.UseEndpoints(endpoints =>
 //{
